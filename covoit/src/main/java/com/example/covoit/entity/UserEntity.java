@@ -34,9 +34,6 @@ public class UserEntity {
     @Column(name="is_connected")
     private Boolean isConnect;
 
-    @Column(name="date_last_connection")
-    private LocalDateTime dateLastConnection;
-
     @Column(name="phone_number")
     private String phoneNumber;
 
@@ -117,14 +114,6 @@ public class UserEntity {
 
     public void setConnect(Boolean connect) {
         isConnect = connect;
-    }
-
-    public LocalDateTime getDateLastConnection() {
-        return dateLastConnection;
-    }
-
-    public void setDateLastConnection(LocalDateTime dateLastConnection) {
-        this.dateLastConnection = dateLastConnection;
     }
 
     public String getPhoneNumber() {
