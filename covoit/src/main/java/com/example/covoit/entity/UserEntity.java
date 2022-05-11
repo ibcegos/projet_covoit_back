@@ -2,6 +2,8 @@ package com.example.covoit.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -28,8 +30,15 @@ public class UserEntity {
     @Column(name="email")
     private String email;
 
-    @Column(name="FK_role_id")
-    private Integer role;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_role_id")
+    private RoleEntity role;
+
+    @OneToMany(mappedBy = "user")
+    private List<DriversEntity> driverList;
+
+    @OneToMany(mappedBy = "userRide")
+    private List<RidersEntity> riderList;
 
     @Column(name="is_connected")
     private Boolean isConnect;
@@ -100,11 +109,11 @@ public class UserEntity {
         this.email = email;
     }
 
-    public Integer getRole() {
+    public RoleEntity getRole() {
         return role;
     }
 
-    public void setRole(Integer role) {
+    public void setRole(RoleEntity role) {
         this.role = role;
     }
 
@@ -158,5 +167,43 @@ public class UserEntity {
 
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public List<DriversEntity> getDriverList() {
+        return driverList;
+    }
+
+    public void setDriverList(List<DriversEntity> driverList) {
+        this.driverList = driverList;
+    }
+
+    public List<RidersEntity> getRiderList() {
+        return riderList;
+    }
+
+    public void setRiderList(List<RidersEntity> riderList) {
+        this.riderList = riderList;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", pseudo='" + pseudo + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                ", driverList=" + driverList +
+                ", riderList=" + riderList +
+                ", isConnect=" + isConnect +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", verified=" + verified +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", deletedAt=" + deletedAt +
+                '}';
     }
 }

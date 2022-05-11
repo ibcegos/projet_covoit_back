@@ -1,6 +1,7 @@
 package com.example.covoit.service;
 
 import com.example.covoit.dto.UserDto;
+import com.example.covoit.entity.DriversEntity;
 import com.example.covoit.entity.UserEntity;
 import com.example.covoit.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class UserService implements IUserService {
         dto.setConnect(entity.getConnect());
         dto.setPhoneNumber(entity.getPhoneNumber());
         dto.setAvatar(entity.getAvatar());
+        dto.setRole(entity.getRole().getTitle());
         dto.setCreatedAt(entity.getCreatedAt());
         return dto;
     }
@@ -42,7 +44,7 @@ public class UserService implements IUserService {
         entity.setEmail(dto.getEmail());
         entity.setConnect(false);
         entity.setPhoneNumber(dto.getPhoneNumber());
-        entity.setRole(1);
+        entity.getRole().getTitle();
         entity.setPassword(dto.getPassword());
         entity.setAvatar(dto.getAvatar());
         entity.setCreatedAt(dto.getCreatedAt());

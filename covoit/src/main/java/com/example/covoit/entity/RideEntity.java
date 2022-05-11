@@ -3,7 +3,9 @@ package com.example.covoit.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Rides")
@@ -38,6 +40,9 @@ public class RideEntity {
 
     @Column(name="ride_type")
     private String rideType;
+
+    @OneToMany(mappedBy = "ride")
+    private List<DriversEntity> driverList = new ArrayList<>();
 
     @Column(name="created_at")
     private LocalDateTime createdAt;
@@ -136,6 +141,14 @@ public class RideEntity {
         this.deletedAt = deletedAt;
     }
 
+    public List<DriversEntity> getDriverList() {
+        return driverList;
+    }
+
+    public void setDriverList(List<DriversEntity> driverList) {
+        this.driverList = driverList;
+    }
+
     @Override
     public String toString() {
         return "RideEntity{" +
@@ -152,4 +165,5 @@ public class RideEntity {
                 ", deletedAt=" + deletedAt +
                 '}';
     }
+
 }
