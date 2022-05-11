@@ -1,14 +1,11 @@
 package com.example.covoit.service;
 
-import com.example.covoit.dto.CreateUserDto;
 import com.example.covoit.dto.UserDto;
 import com.example.covoit.entity.UserEntity;
 import com.example.covoit.repository.IUserRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,18 +19,23 @@ public class UserService implements IUserService {
     @Override
     public UserDto toDto(UserEntity entity) {
         UserDto dto = new UserDto();
+        dto.setId(entity.getId());
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setPseudo(entity.getPseudo());
+        dto.setPassword(entity.getPassword());
         dto.setEmail(entity.getEmail());
         dto.setConnect(entity.getConnect());
         dto.setPhoneNumber(entity.getPhoneNumber());
+        dto.setAvatar(entity.getAvatar());
+        dto.setCreatedAt(entity.getCreatedAt());
         return dto;
     }
 
     @Override
-    public Integer createUser(CreateUserDto dto) {
+    public UserEntity toEntity(UserDto dto) {
         UserEntity entity = new UserEntity();
+        entity.setId(dto.getId());
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setPseudo(dto.getPseudo());
@@ -43,7 +45,15 @@ public class UserService implements IUserService {
         entity.setRole("User");
         entity.setPassword(dto.getPassword());
         entity.setAvatar(dto.getAvatar());
+        entity.setCreatedAt(dto.getCreatedAt());
         entity.setVerified(false);
+        return entity;
+    }
+
+    @Override
+    public Integer createUser(UserDto dto) {
+        UserEntity entity = new UserEntity();
+        this.toEntity(dto);
         entity.setCreatedAt(LocalDateTime.now());
         try {
             repository.saveAndFlush(entity);
@@ -65,6 +75,28 @@ public class UserService implements IUserService {
             listAllUser.add(dto);
         }
         return listAllUser;
+    }
+
+    @Override
+    public List<UserDto> getUserToValidate() {
+        List<UserEntity> userToValidate = repository.findByUserNoValidate();
+        List<UserDto> listAllUserNoValidate = new ArrayList<>();
+
+        for (int i =0; i < userToValidate.size(); i++) {
+            UserEntity entity = userToValidate.get(i);
+            UserDto dto = this.toDto(entity);
+            listAllUserNoValidate.add(dto);
+        }
+
+        return listAllUserNoValidate;
+    }
+
+    @Override
+    public void validateAccountService(UserDto dto) {
+        UserEntity entity = this.toEntity(dto);
+        entity.setVerified(true);
+
+        repository.saveAndFlush(entity);
     }
 
 
