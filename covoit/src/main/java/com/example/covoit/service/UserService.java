@@ -42,7 +42,7 @@ public class UserService implements IUserService {
         entity.setEmail(dto.getEmail());
         entity.setConnect(false);
         entity.setPhoneNumber(dto.getPhoneNumber());
-        entity.setRole("User");
+        entity.setRole(1);
         entity.setPassword(dto.getPassword());
         entity.setAvatar(dto.getAvatar());
         entity.setCreatedAt(dto.getCreatedAt());

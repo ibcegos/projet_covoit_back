@@ -28,8 +28,8 @@ public class UserEntity {
     @Column(name="email")
     private String email;
 
-    @Column(name="role")
-    private String role;
+    @Column(name="FK_role_id")
+    private Integer role;
 
     @Column(name="is_connected")
     private Boolean isConnect;
@@ -100,11 +100,11 @@ public class UserEntity {
         this.email = email;
     }
 
-    public String getRole() {
+    public Integer getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Integer role) {
         this.role = role;
     }
 
