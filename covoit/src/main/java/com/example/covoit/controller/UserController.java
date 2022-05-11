@@ -1,6 +1,5 @@
 package com.example.covoit.controller;
 
-import com.example.covoit.dto.CreateUserDto;
 import com.example.covoit.dto.UserDto;
 import com.example.covoit.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping("add_user")
-    public ResponseEntity addUser(@RequestBody CreateUserDto dto) {
+    public ResponseEntity addUser(@RequestBody UserDto dto) {
 
         Integer id = service.createUser(dto);
 
@@ -35,6 +34,13 @@ public class UserController {
         return new ResponseEntity(id, HttpStatus.CREATED);
     }
 
+    @GetMapping("get_user")
+    public List<UserDto> getUserToValidate() { return service.getUserToValidate(); }
 
+    @PostMapping("validate_account")
+    public void validateAccount(@RequestBody UserDto dto) {
+
+        service.validateAccountService(dto);
+    }
 
 }

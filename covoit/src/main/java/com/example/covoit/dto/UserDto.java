@@ -1,15 +1,30 @@
 package com.example.covoit.dto;
 
+import java.time.LocalDateTime;
+
 public class UserDto {
 
+    private Integer id;
     private String lastName;
     private String firstName;
     private String pseudo;
     private String password;
     private String email;
+    private String role;
     private Boolean isConnect;
     private String phoneNumber;
     private String avatar;
+    private Boolean verified;
+    private LocalDateTime createdAt;
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getPassword() {
         return password;
@@ -73,5 +88,46 @@ public class UserDto {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", pseudo='" + pseudo + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", isConnect=" + isConnect +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", verified=" + verified +
+                '}';
     }
 }
