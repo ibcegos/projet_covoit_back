@@ -1,9 +1,13 @@
 package com.example.covoit.service;
 
+import com.example.covoit.dto.RoleDto;
 import com.example.covoit.dto.UserDto;
 import com.example.covoit.entity.DriversEntity;
+import com.example.covoit.entity.RoleEntity;
 import com.example.covoit.entity.UserEntity;
 import com.example.covoit.repository.IUserRepository;
+import org.apache.catalina.Role;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +24,9 @@ public class UserService implements IUserService {
     @Override
     public UserDto toDto(UserEntity entity) {
         UserDto dto = new UserDto();
+        RoleDto roleDto = new RoleDto();
+        roleDto.setLibelle(entity.getRole().getTitle());
+
         dto.setId(entity.getId());
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
@@ -29,33 +36,40 @@ public class UserService implements IUserService {
         dto.setConnect(entity.getConnect());
         dto.setPhoneNumber(entity.getPhoneNumber());
         dto.setAvatar(entity.getAvatar());
-        dto.setRole(entity.getRole().getTitle());
+        dto.setRole(roleDto);
+        dto.setVerified(entity.getVerified());
         dto.setCreatedAt(entity.getCreatedAt());
         return dto;
     }
 
     @Override
     public UserEntity toEntity(UserDto dto) {
+        RoleEntity userRole = new RoleEntity();
+        userRole.setTitle("User");
+        userRole.setId(1);
+
         UserEntity entity = new UserEntity();
-        entity.setId(dto.getId());
+
+        if (dto.getId() != null) {
+            entity.setId(dto.getId());
+        }
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setPseudo(dto.getPseudo());
         entity.setEmail(dto.getEmail());
         entity.setConnect(false);
         entity.setPhoneNumber(dto.getPhoneNumber());
-        entity.getRole().getTitle();
+        entity.setRole(userRole);
         entity.setPassword(dto.getPassword());
         entity.setAvatar(dto.getAvatar());
-        entity.setCreatedAt(dto.getCreatedAt());
         entity.setVerified(false);
+        entity.setCreatedAt(dto.getCreatedAt());
         return entity;
     }
 
     @Override
     public Integer createUser(UserDto dto) {
-        UserEntity entity = new UserEntity();
-        this.toEntity(dto);
+        UserEntity entity = this.toEntity(dto);
         entity.setCreatedAt(LocalDateTime.now());
         try {
             repository.saveAndFlush(entity);
@@ -63,9 +77,9 @@ public class UserService implements IUserService {
         } catch(Exception e) {
             return null;
         }
-
     }
 
+    //pas utilisé !!!
     @Override
     public List<UserDto> getAllUser() {
         List<UserEntity> userList = repository.findAll();
@@ -94,11 +108,16 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void validateAccountService(UserDto dto) {
+    public UserDto validateAccountService(UserDto dto) {
         UserEntity entity = this.toEntity(dto);
         entity.setVerified(true);
 
         repository.saveAndFlush(entity);
+
+        UserDto returnDto = new UserDto();
+        returnDto = this.toDto(entity);
+
+        return returnDto;
     }
 
 

@@ -42,4 +42,13 @@ public class RidersEntity {
     public void setUser(UserEntity userRide) {
         this.userRide = userRide;
     }
+
+    @Override
+    public String toString() {
+        return "RidersEntity{" +
+                "id=" + id +
+                ", ride=" + ride +
+                ", userRide=" + userRide +
+                '}';
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.covoit.dto;
 
+import com.example.covoit.entity.RoleEntity;
+
 import java.time.LocalDateTime;
 
 public class UserDto {
@@ -10,7 +12,7 @@ public class UserDto {
     private String pseudo;
     private String password;
     private String email;
-    private String role;
+    private RoleDto role;
     private Boolean isConnect;
     private String phoneNumber;
     private String avatar;
@@ -90,11 +92,11 @@ public class UserDto {
         this.avatar = avatar;
     }
 
-    public String getRole() {
+    public RoleDto getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleDto role) {
         this.role = role;
     }
 

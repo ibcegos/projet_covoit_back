@@ -2,7 +2,6 @@ package com.example.covoit.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,7 +17,7 @@ public class RoleEntity {
     private String title;
 
     @OneToMany(mappedBy = "role")
-    private List<UserEntity> userList = new ArrayList<>();
+    private List<UserEntity> userList;
 
     @Column(name="created_at")
     private LocalDateTime createdAt;
@@ -75,5 +74,17 @@ public class RoleEntity {
 
     public void setUserList(List<UserEntity> userList) {
         this.userList = userList;
+    }
+
+    @Override
+    public String toString() {
+        return "RoleEntity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", userList=" + userList +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", deletedAt=" + deletedAt +
+                '}';
     }
 }
