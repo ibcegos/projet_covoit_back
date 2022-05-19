@@ -21,8 +21,7 @@ public class RideEntity {
     @Column(name="date_Aller")
     private String dateAller;
 
-    @Column(name="date_Retour")
-    private String dateRetour;
+
 
 
     @Column(name="time_Aller")
@@ -42,7 +41,7 @@ public class RideEntity {
     private String rideType;
 
     @OneToMany(mappedBy = "ride")
-    private List<DriversEntity> driverList = new ArrayList<>();
+    private List<DriversEntity> driversList;
 
     @Column(name="created_at")
     private LocalDateTime createdAt;
@@ -69,13 +68,7 @@ public class RideEntity {
         this.dateAller = dateAller;
     }
 
-    public String getDateRetour() {
-        return dateRetour;
-    }
 
-    public void setDateRetour(String dateRetour) {
-        this.dateRetour = dateRetour;
-    }
 
     public String getTimeAller() {
         return timeAller;
@@ -142,11 +135,11 @@ public class RideEntity {
     }
 
     public List<DriversEntity> getDriverList() {
-        return driverList;
+        return driversList;
     }
 
-    public void setDriverList(List<DriversEntity> driverList) {
-        this.driverList = driverList;
+    public void setDriverList(List<DriversEntity> driversList) {
+        this.driversList = driversList;
     }
 
     @Override
@@ -154,7 +147,7 @@ public class RideEntity {
         return "RideEntity{" +
                 "id=" + id +
                 ", dateAller='" + dateAller + '\'' +
-                ", dateRetour='" + dateRetour + '\'' +
+
                 ", timeAller='" + timeAller + '\'' +
                 ", timeRetour='" + timeRetour + '\'' +
                 ", departure='" + departure + '\'' +

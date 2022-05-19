@@ -22,13 +22,25 @@ public class RideService implements IRideService {
         dto.setDeparture(entity.getDeparture());
         dto.setDestination(entity.getDestination());
         dto.setDateAller(entity.getDateAller());
-        dto.setDateRetour(entity.getDateRetour());
+
         dto.setRideType(entity.getRideType());
         dto.setTimeRetour(entity.getTimeRetour());
         dto.setTimeAller(entity.getTimeAller());
 
         return dto;
     }
+    @Override
+    public RideEntity toEntity(RideDto dto) {
+        RideEntity entity = new RideEntity();
+        entity.setDeparture(dto.getDeparture());
+        entity.setDestination(dto.getDestination());
+        entity.setDateAller(dto.getDateAller());
+        entity.setRideType(dto.getRideType());
+        entity.setTimeRetour(dto.getTimeRetour());
+        entity.setTimeAller(dto.getTimeAller());
+        return entity;
+    }
+
 
     @Override
     public List<RideDto> getRides() {

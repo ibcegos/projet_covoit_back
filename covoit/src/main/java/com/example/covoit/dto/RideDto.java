@@ -2,22 +2,21 @@ package com.example.covoit.dto;
 
 public class RideDto {
 
-    private String id;
+    private Integer id;
     private String departure;
     private String destination;
     private String dateAller ;
-    private String dateRetour ;
+
     private String timeAller ;
     private String timeRetour ;
     private String rideType ;
 
-    public String getId() {
+
+    public Integer getId() {
         return id;
     }
 
-
-
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -49,13 +48,7 @@ public class RideDto {
         this.dateAller = dateAller;
     }
 
-    public String getDateRetour() {
-        return dateRetour;
-    }
 
-    public void setDateRetour(String dateRetour) {
-        this.dateRetour = dateRetour;
-    }
 
 
 
@@ -77,5 +70,19 @@ public class RideDto {
 
     public void setRideType(String rideType) {
         this.rideType = rideType;
+    }
+
+    @Override
+    public String toString() {
+        return "RideDto{" +
+                "id=" + id +
+                ", departure='" + departure + '\'' +
+                ", destination='" + destination + '\'' +
+                ", dateAller='" + dateAller + '\'' +
+
+                ", timeAller='" + timeAller + '\'' +
+                ", timeRetour='" + timeRetour + '\'' +
+                ", rideType='" + rideType + '\'' +
+                '}';
     }
 }

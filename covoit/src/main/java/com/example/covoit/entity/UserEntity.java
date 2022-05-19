@@ -34,7 +34,7 @@ public class UserEntity {
     private RoleEntity role;
 
     @OneToMany(mappedBy = "user")
-    private List<DriversEntity> driverList;
+    private List<DriversEntity> driversList;
 
     @OneToMany(mappedBy = "userRide")
     private List<RidersEntity> riderList;
@@ -169,11 +169,11 @@ public class UserEntity {
     }
 
     public List<DriversEntity> getDriverList() {
-        return driverList;
+        return driversList;
     }
 
-    public void setDriverList(List<DriversEntity> driverList) {
-        this.driverList = driverList;
+    public void setDriversList(List<DriversEntity> driversList) {
+        this.driversList = driversList;
     }
 
     public List<RidersEntity> getRiderList() {
@@ -194,7 +194,7 @@ public class UserEntity {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +
-                ", driverList=" + driverList +
+                ", driverList=" + driversList +
                 ", riderList=" + riderList +
                 ", isConnect=" + isConnect +
                 ", phoneNumber='" + phoneNumber + '\'' +
