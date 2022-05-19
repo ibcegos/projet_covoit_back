@@ -2,7 +2,6 @@ package com.example.covoit.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,7 +29,7 @@ public class UserEntity {
     @Column(name="email")
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) //eager car sinon on récupère pas le rôle associé au user
     @JoinColumn(name = "FK_role_id")
     private RoleEntity role;
 

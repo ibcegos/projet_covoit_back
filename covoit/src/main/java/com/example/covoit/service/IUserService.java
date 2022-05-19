@@ -14,9 +14,10 @@ public interface IUserService {
 
     Integer createUser (UserDto dto);
 
+    //pas utilisé
     List<UserDto> getAllUser();
 
     List<UserDto> getUserToValidate();
 
-    void validateAccountService(UserDto dto);
+    UserDto validateAccountService(UserDto dto);
 }

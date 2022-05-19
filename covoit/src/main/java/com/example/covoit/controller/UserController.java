@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("Covoit")
 public class UserController {
 
     @Autowired
     private IUserService service;
 
+    //pas utilisé
     @GetMapping("getAllUser")
     public List<UserDto> getAllUser() {
         return service.getAllUser();
@@ -38,9 +39,9 @@ public class UserController {
     public List<UserDto> getUserToValidate() { return service.getUserToValidate(); }
 
     @PostMapping("validate_account")
-    public void validateAccount(@RequestBody UserDto dto) {
+    public UserDto validateAccount(@RequestBody UserDto dto) {
 
-        service.validateAccountService(dto);
+        return service.validateAccountService(dto);
     }
 
 }
