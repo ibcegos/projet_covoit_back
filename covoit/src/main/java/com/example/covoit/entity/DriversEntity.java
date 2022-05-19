@@ -17,11 +17,11 @@ public class DriversEntity {
     @Column(name="seats")
     private Integer seat;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "FK_ride_id")
     private RideEntity ride;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "FK_user_id")
     private UserEntity user;
 
@@ -64,6 +64,10 @@ public class DriversEntity {
     public void setUser(UserEntity user) {
         this.user = user;
     }
+
+
+
+
 
     @Override
     public String toString() {

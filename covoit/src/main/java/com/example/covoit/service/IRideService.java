@@ -9,6 +9,8 @@ public interface IRideService {
 
     RideDto toDto(RideEntity entity);
 
+    RideEntity toEntity(RideDto dto);
+
     List<RideDto> getRides();
 
 
