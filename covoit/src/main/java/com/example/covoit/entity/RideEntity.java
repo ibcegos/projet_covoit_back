@@ -3,33 +3,16 @@ package com.example.covoit.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "Rides")
 public class RideEntity {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
-
-    @Column(name="date_Aller")
-    private String dateAller;
-
-
-
-
-    @Column(name="time_Aller")
-    private String timeAller;
-
-    @Column(name="time_Retour")
-    private String timeRetour;
-
+    private Integer id;
 
     @Column(name="departure")
     private String departure;
@@ -37,11 +20,22 @@ public class RideEntity {
     @Column(name="destination")
     private String destination;
 
-    @Column(name="ride_type")
-    private String rideType;
+    @Column(name="vehicule_type")
+    private String vehicleType;
+
+    @Column(name="seats")
+    private Integer seats;
 
     @OneToMany(mappedBy = "ride")
     private List<DriversEntity> driversList;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_simple_ride_id")
+    private SimpleRideEntity simpleRide;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_recurrent_ride_id")
+    private RecurrentRideEntity recurrentRide;
 
     @Column(name="created_at")
     private LocalDateTime createdAt;
@@ -52,38 +46,12 @@ public class RideEntity {
     @Column(name="deleted_at")
     private LocalDateTime deletedAt;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getDateAller() {
-        return dateAller;
-    }
-
-    public void setDateAller(String dateAller) {
-        this.dateAller = dateAller;
-    }
-
-
-
-    public String getTimeAller() {
-        return timeAller;
-    }
-
-    public void setTimeAller(String timeAller) {
-        this.timeAller = timeAller;
-    }
-
-    public String getTimeRetour() {
-        return timeRetour;
-    }
-
-    public void setTimeRetour(String timeRetour) {
-        this.timeRetour = timeRetour;
     }
 
     public String getDeparture() {
@@ -100,14 +68,6 @@ public class RideEntity {
 
     public void setDestination(String destination) {
         this.destination = destination;
-    }
-
-    public String getRideType() {
-        return rideType;
-    }
-
-    public void setRideType(String rideType) {
-        this.rideType = rideType;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -142,21 +102,60 @@ public class RideEntity {
         this.driversList = driversList;
     }
 
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
+    public Integer getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Integer seats) {
+        this.seats = seats;
+    }
+
+    public List<DriversEntity> getDriversList() {
+        return driversList;
+    }
+
+    public void setDriversList(List<DriversEntity> driversList) {
+        this.driversList = driversList;
+    }
+
+    public SimpleRideEntity getSimpleRide() {
+        return simpleRide;
+    }
+
+    public void setSimpleRide(SimpleRideEntity simpleRide) {
+        this.simpleRide = simpleRide;
+    }
+
+    public RecurrentRideEntity getRecurrentRide() {
+        return recurrentRide;
+    }
+
+    public void setRecurrentRide(RecurrentRideEntity recurrentRide) {
+        this.recurrentRide = recurrentRide;
+    }
+
     @Override
     public String toString() {
         return "RideEntity{" +
                 "id=" + id +
-                ", dateAller='" + dateAller + '\'' +
-
-                ", timeAller='" + timeAller + '\'' +
-                ", timeRetour='" + timeRetour + '\'' +
                 ", departure='" + departure + '\'' +
                 ", destination='" + destination + '\'' +
-                ", rideType='" + rideType + '\'' +
+                ", vehicleType='" + vehicleType + '\'' +
+                ", seats=" + seats +
+                ", driversList=" + driversList +
+                ", simpleRide=" + simpleRide +
+                ", recurrentRide=" + recurrentRide +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", deletedAt=" + deletedAt +
                 '}';
     }
-
 }

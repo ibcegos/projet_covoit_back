@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@groupe-de-projet.database.windows.net" uuid="32ce44ab-6bf6-42dc-a08a-67907c6eab89">
+    <data-source source="LOCAL" name="Covoit_project@groupe-de-projet.database.windows.net" uuid="dcdc1464-6883-4d76-a0d5-8675dab457ab">
       <driver-ref>sqlserver.ms</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
-      <jdbc-url>jdbc:sqlserver://groupe-de-projet.database.windows.net:1433</jdbc-url>
+      <jdbc-url>jdbc:sqlserver://groupe-de-projet.database.windows.net:1433;database=Covoit_project</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

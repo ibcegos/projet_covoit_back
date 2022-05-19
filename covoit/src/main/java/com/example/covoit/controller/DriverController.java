@@ -16,10 +16,10 @@ import java.util.List;
 public class DriverController {
     @Autowired
     private IDriverService driverService;
-    @GetMapping("/getdriver")
-    public List<DriverDto> getDrivers(){
-        return driverService.getDrivers();
-    }
+//    @GetMapping("/getdriver")
+//    public List<DriverDto> getDrivers(){
+//        return driverService.getDrivers();
+//    }
 
 }
 
