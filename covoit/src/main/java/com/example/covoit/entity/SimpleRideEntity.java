@@ -6,7 +6,9 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Entity
-@Table(name="trajet_simple")
+
+@Table(name="Simples")
+
 public class SimpleRideEntity {
 
     @Id
@@ -24,7 +26,11 @@ public class SimpleRideEntity {
     private LocalTime timeRetour;
 
     @OneToMany(mappedBy = "simpleRide")
-    private List<RideEntity> rideList;
+
+
+
+    private List<RideEntity> simpleList;
+
 
 
     public Integer getId() {
@@ -59,12 +65,16 @@ public class SimpleRideEntity {
         this.timeRetour = timeRetour;
     }
 
-    public List<RideEntity> getRideList() {
-        return rideList;
+
+
+
+    public List<RideEntity> getSimpleList() {
+        return simpleList;
     }
 
-    public void setRideList(List<RideEntity> rideList) {
-        this.rideList = rideList;
+    public void setSimpleList(List<RideEntity> simpleList) {
+        this.simpleList = simpleList;
+
     }
 
     @Override
@@ -74,7 +84,7 @@ public class SimpleRideEntity {
                 ", dateAller=" + dateAller +
                 ", timeAller=" + timeAller +
                 ", timeRetour=" + timeRetour +
-                ", RideList=" + rideList +
+                ", RideList=" + simpleList +
 
                 '}';
     }
