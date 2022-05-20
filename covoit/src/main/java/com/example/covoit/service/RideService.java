@@ -34,7 +34,7 @@ public class RideService implements IRideService {
 
         RecurrentRideDto recurrentRide = new RecurrentRideDto();
         recurrentRide.setJourAller(entity.getRecurrentRide().getJourAller());
-        recurrentRide.setTimeAller(entity.getSimpleRide().getTimeAller());
+        recurrentRide.setTimeAller(entity.getRecurrentRide().getTimeAller());
         recurrentRide.setTimeRetour(entity.getRecurrentRide().getTimeRetour());
         dto.setRecurrentRide(recurrentRide);
 

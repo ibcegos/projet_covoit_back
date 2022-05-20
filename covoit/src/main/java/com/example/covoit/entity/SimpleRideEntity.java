@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Entity
-@Table(name="SimpleRides")
+@Table(name="Simples")
 public class SimpleRideEntity {
 
     @Id
@@ -24,7 +24,7 @@ public class SimpleRideEntity {
     private LocalTime timeRetour;
 
     @OneToMany(mappedBy = "simpleRide")
-    private List<SimpleRideEntity> simpleList;
+    private List<RideEntity> simpleList;
 
 
     public Integer getId() {
@@ -59,11 +59,11 @@ public class SimpleRideEntity {
         this.timeRetour = timeRetour;
     }
 
-    public List<SimpleRideEntity> getSimpleList() {
+    public List<RideEntity> getSimpleList() {
         return simpleList;
     }
 
-    public void setSimpleList(List<SimpleRideEntity> simpleList) {
+    public void setSimpleList(List<RideEntity> simpleList) {
         this.simpleList = simpleList;
     }
 

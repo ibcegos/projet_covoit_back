@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Entity
-@Table(name="RecurrentRides")
+@Table(name="Recurrents")
 public class RecurrentRideEntity {
 
     @Id
@@ -23,7 +23,7 @@ public class RecurrentRideEntity {
     private LocalTime timeRetour;
 
     @OneToMany(mappedBy = "recurrentRide")
-    private List<RecurrentRideEntity> recurrentList;
+    private List<RideEntity> recurrentList;
 
     public Integer getId() {
         return id;
@@ -57,11 +57,11 @@ public class RecurrentRideEntity {
         this.timeRetour = timeRetour;
     }
 
-    public List<RecurrentRideEntity> getRecurrentList() {
+    public List<RideEntity> getRecurrentList() {
         return recurrentList;
     }
 
-    public void setRecurrentList(List<RecurrentRideEntity> recurrentList) {
+    public void setRecurrentList(List<RideEntity> recurrentList) {
         this.recurrentList = recurrentList;
     }
 
