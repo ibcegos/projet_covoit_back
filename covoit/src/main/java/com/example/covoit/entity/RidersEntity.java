@@ -9,7 +9,7 @@ public class RidersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_riders_ride_id")
@@ -19,11 +19,11 @@ public class RidersEntity {
     @JoinColumn(name = "FK_riders_user_id")
     private UserEntity userRide;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

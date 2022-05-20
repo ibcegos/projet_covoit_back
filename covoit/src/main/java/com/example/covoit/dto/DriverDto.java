@@ -6,10 +6,7 @@ import com.example.covoit.entity.RideEntity;
 public class DriverDto {
 
     private Integer id;
-    private String vehicleType;
-    private Integer seats;
     private RideDto ride;
-
     private UserDto user;
 
 
@@ -19,22 +16,6 @@ public class DriverDto {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getVehicleType() {
-        return vehicleType;
-    }
-
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
-    }
-
-    public Integer getSeats() {
-        return seats;
-    }
-
-    public void setSeats(Integer seats) {
-        this.seats = seats;
     }
 
     public RideDto getRide() {
@@ -57,8 +38,6 @@ public class DriverDto {
     public String toString() {
         return "DriverDto{" +
                 "id=" + id +
-                ", vehicleType='" + vehicleType + '\'' +
-                ", seats=" + seats +
                 ", ride=" + ride +
                 ", user=" + user +
                 '}';

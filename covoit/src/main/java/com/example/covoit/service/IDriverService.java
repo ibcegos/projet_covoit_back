@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface IDriverService {
 
-    DriverDto toDto(DriversEntity entity);
+    //DriverDto toDto(DriversEntity entity);
 
-    List<DriverDto> getDrivers();
+    //List<DriverDto> getDrivers();
 
     DriversEntity toEntity(DriverDto dto);
 }

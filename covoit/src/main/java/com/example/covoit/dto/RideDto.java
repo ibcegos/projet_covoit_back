@@ -1,16 +1,19 @@
 package com.example.covoit.dto;
 
+import com.example.covoit.entity.SimpleRideEntity;
+
+import java.util.List;
+
 public class RideDto {
 
     private Integer id;
     private String departure;
     private String destination;
-    private String dateAller ;
-
-    private String timeAller ;
-    private String timeRetour ;
-    private String rideType ;
-
+    private String vehicule_type;
+    private Integer seats;
+    private String rideType;
+    private List<SimpleRideDto> simpleList;
+    private List<RecurrentRideDto> recurrentList;
 
     public Integer getId() {
         return id;
@@ -18,10 +21,6 @@ public class RideDto {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getTimeAller() {
-        return timeAller;
     }
 
     public String getDeparture() {
@@ -40,28 +39,36 @@ public class RideDto {
         this.destination = destination;
     }
 
-    public String getDateAller() {
-        return dateAller;
+    public String getVehicule_type() {
+        return vehicule_type;
     }
 
-    public void setDateAller(String dateAller) {
-        this.dateAller = dateAller;
+    public void setVehicule_type(String vehicule_type) {
+        this.vehicule_type = vehicule_type;
     }
 
-
-
-
-
-    public void setTimeAller(String timeAller) {
-        this.timeAller = timeAller;
+    public Integer getSeats() {
+        return seats;
     }
 
-    public String getTimeRetour() {
-        return timeRetour;
+    public void setSeats(Integer seats) {
+        this.seats = seats;
     }
 
-    public void setTimeRetour(String timeRetour) {
-        this.timeRetour = timeRetour;
+    public List<SimpleRideDto> getSimpleList() {
+        return simpleList;
+    }
+
+    public void setSimpleList(List<SimpleRideDto> simpleList) {
+        this.simpleList = simpleList;
+    }
+
+    public List<RecurrentRideDto> getRecurrentList() {
+        return recurrentList;
+    }
+
+    public void setRecurrentList(List<RecurrentRideDto> recurrentList) {
+        this.recurrentList = recurrentList;
     }
 
     public String getRideType() {
@@ -78,11 +85,11 @@ public class RideDto {
                 "id=" + id +
                 ", departure='" + departure + '\'' +
                 ", destination='" + destination + '\'' +
-                ", dateAller='" + dateAller + '\'' +
-
-                ", timeAller='" + timeAller + '\'' +
-                ", timeRetour='" + timeRetour + '\'' +
+                ", vehicule_type='" + vehicule_type + '\'' +
+                ", seats=" + seats +
                 ", rideType='" + rideType + '\'' +
+                ", simpleList=" + simpleList +
+                ", recurrentList=" + recurrentList +
                 '}';
     }
 }

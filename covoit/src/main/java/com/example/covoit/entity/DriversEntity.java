@@ -9,13 +9,7 @@ public class DriversEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
-
-    @Column(name="vehicule_type")
-    private String vehiculeType;
-
-    @Column(name="seats")
-    private Integer seat;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "FK_ride_id")
@@ -25,28 +19,12 @@ public class DriversEntity {
     @JoinColumn(name = "FK_user_id")
     private UserEntity user;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getVehiculeType() {
-        return vehiculeType;
-    }
-
-    public void setVehiculeType(String vehiculeType) {
-        this.vehiculeType = vehiculeType;
-    }
-
-    public Integer getSeat() {
-        return seat;
-    }
-
-    public void setSeat(Integer seat) {
-        this.seat = seat;
     }
 
     public RideEntity getRide() {
@@ -66,15 +44,10 @@ public class DriversEntity {
     }
 
 
-
-
-
     @Override
     public String toString() {
         return "DriversEntity{" +
                 "id=" + id +
-                ", vehiculeType='" + vehiculeType + '\'' +
-                ", seat=" + seat +
                 ", ride=" + ride +
                 ", user=" + user +
                 '}';
