@@ -26,20 +26,28 @@ public class RideService implements IRideService {
         dto.setDestination(entity.getDestination());
         dto.setSeats(entity.getSeats());
         dto.setVehicule_type(entity.getVehicleType());
+        dto.setRideType(entity.getRideType());
 
+        List<SimpleRideDto> simpleRideList = new ArrayList();
         SimpleRideDto simpleRide = new SimpleRideDto();
-        simpleRide.setId(entity.getId());
-        simpleRide.setDateAller(entity.getSimpleRide().getDateAller());
-        simpleRide.setTimeAller(entity.getSimpleRide().getTimeAller());
-        simpleRide.setTimeRetour(entity.getSimpleRide().getTimeRetour());
-        dto.setSimpleRide(simpleRide);
+        for (int i=0; i<entity.getSimpleList().size(); i++) {
+            simpleRide.setDateAller(entity.getSimpleList().get(i).getDateAller());
+            simpleRide.setTimeAller(entity.getSimpleList().get(i).getTimeAller());
+            simpleRide.setTimeRetour(entity.getSimpleList().get(i).getTimeRetour());
+            simpleRideList.add(simpleRide);
+        }
+        dto.setSimpleList(simpleRideList);
 
+        List<RecurrentRideDto> recurrentRideList = new ArrayList();
         RecurrentRideDto recurrentRide = new RecurrentRideDto();
-        recurrentRide.setId(entity.getId());
-        recurrentRide.setJourAller(entity.getRecurrentRide().getJourAller());
-        recurrentRide.setTimeAller(entity.getRecurrentRide().getTimeAller());
-        recurrentRide.setTimeRetour(entity.getRecurrentRide().getTimeRetour());
-        dto.setRecurrentRide(recurrentRide);
+
+        for (int i=0; i<entity.getRecurrentList().size(); i++) {
+            recurrentRide.setJourAller(entity.getRecurrentList().get(i).getJourAller());
+            recurrentRide.setTimeAller(entity.getRecurrentList().get(i).getTimeAller());
+            recurrentRide.setTimeRetour(entity.getRecurrentList().get(i).getTimeRetour());
+            recurrentRideList.add(recurrentRide);
+        }
+        dto.setRecurrentList(recurrentRideList);
 
         return dto;
     }

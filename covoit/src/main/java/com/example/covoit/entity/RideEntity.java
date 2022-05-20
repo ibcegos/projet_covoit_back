@@ -26,16 +26,17 @@ public class RideEntity {
     @Column(name="seats")
     private Integer seats;
 
+    @Column(name="ride_type")
+    private String rideType;
+
     @OneToMany(mappedBy = "ride")
     private List<DriversEntity> driversList;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_simple_ride_id")
-    private SimpleRideEntity simpleRide;
+    @OneToMany(mappedBy = "simpleRide")
+    private List<SimpleRideEntity> simpleList;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_recurrent_ride_id")
-    private RecurrentRideEntity recurrentRide;
+    @OneToMany(mappedBy = "recurrentRide")
+    private List<RecurrentRideEntity> recurrentList;
 
     @Column(name="created_at")
     private LocalDateTime createdAt;
@@ -126,20 +127,28 @@ public class RideEntity {
         this.driversList = driversList;
     }
 
-    public SimpleRideEntity getSimpleRide() {
-        return simpleRide;
+    public List<SimpleRideEntity> getSimpleList() {
+        return simpleList;
     }
 
-    public void setSimpleRide(SimpleRideEntity simpleRide) {
-        this.simpleRide = simpleRide;
+    public void setSimpleList(List<SimpleRideEntity> simpleList) {
+        this.simpleList = simpleList;
     }
 
-    public RecurrentRideEntity getRecurrentRide() {
-        return recurrentRide;
+    public List<RecurrentRideEntity> getRecurrentList() {
+        return recurrentList;
     }
 
-    public void setRecurrentRide(RecurrentRideEntity recurrentRide) {
-        this.recurrentRide = recurrentRide;
+    public void setRecurrentList(List<RecurrentRideEntity> recurrentList) {
+        this.recurrentList = recurrentList;
+    }
+
+    public String getRideType() {
+        return rideType;
+    }
+
+    public void setRideType(String rideType) {
+        this.rideType = rideType;
     }
 
     @Override
@@ -150,9 +159,10 @@ public class RideEntity {
                 ", destination='" + destination + '\'' +
                 ", vehicleType='" + vehicleType + '\'' +
                 ", seats=" + seats +
+                ", rideType='" + rideType + '\'' +
                 ", driversList=" + driversList +
-                ", simpleRide=" + simpleRide +
-                ", recurrentRide=" + recurrentRide +
+                ", simpleList=" + simpleList +
+                ", recurrentList=" + recurrentList +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", deletedAt=" + deletedAt +
