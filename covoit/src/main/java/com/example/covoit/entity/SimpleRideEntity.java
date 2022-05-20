@@ -6,7 +6,9 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Entity
+
 @Table(name="Simples")
+
 public class SimpleRideEntity {
 
     @Id
@@ -26,6 +28,7 @@ public class SimpleRideEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_ride_id")
     private RideEntity simpleRide;
+
 
     public Integer getId() {
         return id;
@@ -74,7 +77,7 @@ public class SimpleRideEntity {
                 ", dateAller=" + dateAller +
                 ", timeAller=" + timeAller +
                 ", timeRetour=" + timeRetour +
-                ", simpleList=" + simpleRide +
+                ", simpleRide=" + simpleRide +
                 '}';
     }
 }

@@ -26,6 +26,7 @@ public class RecurrentRideEntity {
     @JoinColumn(name = "FK_ride_id")
     private RideEntity recurrentRide;
 
+
     public Integer getId() {
         return id;
     }
@@ -73,7 +74,7 @@ public class RecurrentRideEntity {
                 ", jourAller='" + jourAller + '\'' +
                 ", timeAller=" + timeAller +
                 ", timeRetour=" + timeRetour +
-                ", recurrentList=" + recurrentRide +
+                ", recurrentRide=" + recurrentRide +
                 '}';
     }
 }

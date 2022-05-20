@@ -40,6 +40,7 @@ public class RideService implements IRideService {
 
         List<RecurrentRideDto> recurrentRideList = new ArrayList();
         RecurrentRideDto recurrentRide = new RecurrentRideDto();
+
         for (int i=0; i<entity.getRecurrentList().size(); i++) {
             recurrentRide.setJourAller(entity.getRecurrentList().get(i).getJourAller());
             recurrentRide.setTimeAller(entity.getRecurrentList().get(i).getTimeAller());
