@@ -26,9 +26,6 @@ public class SimpleRideEntity {
     private LocalTime timeRetour;
 
     @OneToMany(mappedBy = "simpleRide")
-
-
-
     private List<RideEntity> simpleList;
 
 
