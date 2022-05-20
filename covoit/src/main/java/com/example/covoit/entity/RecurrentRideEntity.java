@@ -22,8 +22,9 @@ public class RecurrentRideEntity {
     @Column(name="time_Retour")
     private LocalTime timeRetour;
 
-    @OneToMany(mappedBy = "recurrentRide")
-    private List<RideEntity> recurrentList;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_ride_id")
+    private RideEntity recurrentRide;
 
     public Integer getId() {
         return id;
@@ -57,12 +58,12 @@ public class RecurrentRideEntity {
         this.timeRetour = timeRetour;
     }
 
-    public List<RideEntity> getRecurrentList() {
-        return recurrentList;
+    public RideEntity getRecurrentRide() {
+        return recurrentRide;
     }
 
-    public void setRecurrentList(List<RideEntity> recurrentList) {
-        this.recurrentList = recurrentList;
+    public void setRecurrentRide(RideEntity recurrentRide) {
+        this.recurrentRide = recurrentRide;
     }
 
     @Override
@@ -72,7 +73,7 @@ public class RecurrentRideEntity {
                 ", jourAller='" + jourAller + '\'' +
                 ", timeAller=" + timeAller +
                 ", timeRetour=" + timeRetour +
-                ", recurrentList=" + recurrentList +
+                ", recurrentList=" + recurrentRide +
                 '}';
     }
 }

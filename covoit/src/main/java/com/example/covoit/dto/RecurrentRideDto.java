@@ -8,6 +8,7 @@ public class RecurrentRideDto {
     private String jourAller;
     private LocalTime timeAller;
     private LocalTime timeRetour;
+    private RideDto ride;
 
     public Integer getId() {
         return id;
@@ -41,6 +42,14 @@ public class RecurrentRideDto {
         this.timeRetour = timeRetour;
     }
 
+    public RideDto getRide() {
+        return ride;
+    }
+
+    public void setRide(RideDto ride) {
+        this.ride = ride;
+    }
+
     @Override
     public String toString() {
         return "RecurrentRideDto{" +
@@ -48,6 +57,7 @@ public class RecurrentRideDto {
                 ", jourAller='" + jourAller + '\'' +
                 ", timeAller=" + timeAller +
                 ", timeRetour=" + timeRetour +
+                ", ride=" + ride +
                 '}';
     }
 }

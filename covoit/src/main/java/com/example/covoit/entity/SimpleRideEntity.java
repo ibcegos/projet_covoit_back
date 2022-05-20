@@ -23,9 +23,9 @@ public class SimpleRideEntity {
     @Column(name="time_Retour")
     private LocalTime timeRetour;
 
-    @OneToMany(mappedBy = "simpleRide")
-    private List<RideEntity> simpleList;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_ride_id")
+    private RideEntity simpleRide;
 
     public Integer getId() {
         return id;
@@ -59,12 +59,12 @@ public class SimpleRideEntity {
         this.timeRetour = timeRetour;
     }
 
-    public List<RideEntity> getSimpleList() {
-        return simpleList;
+    public RideEntity getSimpleRide() {
+        return simpleRide;
     }
 
-    public void setSimpleList(List<RideEntity> simpleList) {
-        this.simpleList = simpleList;
+    public void setSimpleRide(RideEntity simpleRide) {
+        this.simpleRide = simpleRide;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class SimpleRideEntity {
                 ", dateAller=" + dateAller +
                 ", timeAller=" + timeAller +
                 ", timeRetour=" + timeRetour +
-                ", simpleList=" + simpleList +
+                ", simpleList=" + simpleRide +
                 '}';
     }
 }

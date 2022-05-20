@@ -1,5 +1,9 @@
 package com.example.covoit.dto;
 
+import com.example.covoit.entity.SimpleRideEntity;
+
+import java.util.List;
+
 public class RideDto {
 
     private Integer id;
@@ -7,8 +11,9 @@ public class RideDto {
     private String destination;
     private String vehicule_type;
     private Integer seats;
-    private SimpleRideDto simpleRide;
-    private RecurrentRideDto recurrentRide;
+    private String rideType;
+    private List<SimpleRideDto> simpleList;
+    private List<RecurrentRideDto> recurrentList;
 
     public Integer getId() {
         return id;
@@ -50,20 +55,28 @@ public class RideDto {
         this.seats = seats;
     }
 
-    public SimpleRideDto getSimpleRide() {
-        return simpleRide;
+    public List<SimpleRideDto> getSimpleList() {
+        return simpleList;
     }
 
-    public void setSimpleRide(SimpleRideDto simpleRide) {
-        this.simpleRide = simpleRide;
+    public void setSimpleList(List<SimpleRideDto> simpleList) {
+        this.simpleList = simpleList;
     }
 
-    public RecurrentRideDto getRecurrentRide() {
-        return recurrentRide;
+    public List<RecurrentRideDto> getRecurrentList() {
+        return recurrentList;
     }
 
-    public void setRecurrentRide(RecurrentRideDto recurrentRide) {
-        this.recurrentRide = recurrentRide;
+    public void setRecurrentList(List<RecurrentRideDto> recurrentList) {
+        this.recurrentList = recurrentList;
+    }
+
+    public String getRideType() {
+        return rideType;
+    }
+
+    public void setRideType(String rideType) {
+        this.rideType = rideType;
     }
 
     @Override
@@ -74,8 +87,9 @@ public class RideDto {
                 ", destination='" + destination + '\'' +
                 ", vehicule_type='" + vehicule_type + '\'' +
                 ", seats=" + seats +
-                ", simpleRide=" + simpleRide +
-                ", recurrentRide=" + recurrentRide +
+                ", rideType='" + rideType + '\'' +
+                ", simpleList=" + simpleList +
+                ", recurrentList=" + recurrentList +
                 '}';
     }
 }
