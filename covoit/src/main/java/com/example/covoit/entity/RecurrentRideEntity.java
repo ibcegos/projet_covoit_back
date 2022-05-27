@@ -1,5 +1,7 @@
 package com.example.covoit.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.List;
@@ -16,9 +18,11 @@ public class RecurrentRideEntity {
     @Column(name="jour_Aller")
     private String jourAller;
 
+    @JsonFormat(pattern="hh:mm")
     @Column(name="time_Aller")
     private LocalTime timeAller;
 
+    @JsonFormat(pattern="hh:mm")
     @Column(name="time_Retour")
     private LocalTime timeRetour;
 

@@ -1,14 +1,21 @@
 package com.example.covoit.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalTime;
 
 public class RecurrentRideDto {
 
     private Integer id;
     private String jourAller;
+
+    @JsonFormat(pattern="hh:mm")
     private LocalTime timeAller;
+    @JsonFormat(pattern="hh:mm")
     private LocalTime timeRetour;
-    private RideDto ride;
+
+
+//    private RideDto ride;
 
     public Integer getId() {
         return id;
@@ -42,13 +49,13 @@ public class RecurrentRideDto {
         this.timeRetour = timeRetour;
     }
 
-    public RideDto getRide() {
-        return ride;
-    }
-
-    public void setRide(RideDto ride) {
-        this.ride = ride;
-    }
+//    public RideDto getRide() {
+//        return ride;
+//    }
+//
+//    public void setRide(RideDto ride) {
+//        this.ride = ride;
+//    }
 
     @Override
     public String toString() {
@@ -57,7 +64,7 @@ public class RecurrentRideDto {
                 ", jourAller='" + jourAller + '\'' +
                 ", timeAller=" + timeAller +
                 ", timeRetour=" + timeRetour +
-                ", ride=" + ride +
+//                ", ride=" + ride +
                 '}';
     }
 }
