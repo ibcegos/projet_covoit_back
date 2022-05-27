@@ -10,7 +10,10 @@ public class CovoitApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CovoitApplication.class, args);
+
     }
+
+
 
 
 }
