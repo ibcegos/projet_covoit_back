@@ -6,6 +6,7 @@ import com.example.covoit.dto.SimpleRideDto;
 import com.example.covoit.entity.RecurrentRideEntity;
 import com.example.covoit.entity.RideEntity;
 import com.example.covoit.repository.IRideRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +29,11 @@ public class RideService implements IRideService {
         dto.setVehicule_type(entity.getVehicleType());
         dto.setRideType(entity.getRideType());
 
-        List<SimpleRideDto> simpleRideList = new ArrayList();
 
-        for (int i=0; i<entity.getSimpleList().size(); i++) {
-            SimpleRideDto simpleRide = new SimpleRideDto();
+        List<SimpleRideDto> simpleRideList = new ArrayList();
+        SimpleRideDto simpleRide = new SimpleRideDto();
+
+        for (int i = 0; i < entity.getSimpleList().size(); i++) {
             simpleRide.setDateAller(entity.getSimpleList().get(i).getDateAller());
             simpleRide.setTimeAller(entity.getSimpleList().get(i).getTimeAller());
             simpleRide.setTimeRetour(entity.getSimpleList().get(i).getTimeRetour());
@@ -41,17 +43,33 @@ public class RideService implements IRideService {
 
         List<RecurrentRideDto> recurrentRideList = new ArrayList();
 
-        for (int i=0; i<entity.getRecurrentList().size(); i++) {
+        for (int i = 0; i < entity.getRecurrentList().size(); i++) {
             RecurrentRideDto recurrentRide = new RecurrentRideDto();
             recurrentRide.setJourAller(entity.getRecurrentList().get(i).getJourAller());
             recurrentRide.setTimeAller(entity.getRecurrentList().get(i).getTimeAller());
             recurrentRide.setTimeRetour(entity.getRecurrentList().get(i).getTimeRetour());
-            recurrentRideList.add(recurrentRide);
+            recurrentRideList.add(i, recurrentRide);
         }
         dto.setRecurrentList(recurrentRideList);
 
         return dto;
     }
+
+    @Override
+    public List<RideDto> getRides() {
+        List<RideEntity> rideList = rideRepository.findAll();
+        List<RideDto> listAllRide = new ArrayList<>();
+
+        for (RideEntity entity : rideList) {
+            RideDto dto = this.toDto(entity);
+            listAllRide.add(dto);
+        }
+        return listAllRide;
+    }
+}
+
+
+
 //    @Override
 //    public RideEntity toEntity(RideDto dto) {
 //        RideEntity entity = new RideEntity();
@@ -65,22 +83,3 @@ public class RideService implements IRideService {
 //    }
 
 
-    @Override
-    public List<RideDto> getRides() {
-        List<RideEntity> rideList = rideRepository.findAll();
-        List<RideDto> listAllRide = new ArrayList<>();
-        List<RecurrentRideDto> listRecurrent = new ArrayList<>();
-
-        for (int i =0; i < rideList.size(); i++) {
-            RideEntity entity = rideList.get(i);
-            RideDto dto = this.toDto(entity);
-            listAllRide.add(dto);
-        }
-
-
-
-        return listAllRide;
-    }
-
-
-}

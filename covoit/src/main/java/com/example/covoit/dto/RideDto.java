@@ -14,6 +14,7 @@ public class RideDto {
     private String rideType;
     private List<SimpleRideDto> simpleList;
     private List<RecurrentRideDto> recurrentList;
+//    private List<DriverDto> driverList;
 
     public Integer getId() {
         return id;
@@ -79,6 +80,14 @@ public class RideDto {
         this.rideType = rideType;
     }
 
+//    public List<DriverDto> getDriverList() {
+//        return driverList;
+//    }
+//
+//    public void setDriverList(List<DriverDto> driverList) {
+//        this.driverList = driverList;
+//    }
+
     @Override
     public String toString() {
         return "RideDto{" +
@@ -90,6 +99,8 @@ public class RideDto {
                 ", rideType='" + rideType + '\'' +
                 ", simpleList=" + simpleList +
                 ", recurrentList=" + recurrentList +
+//                ", driverList=" + driverList +
                 '}';
     }
 }
+

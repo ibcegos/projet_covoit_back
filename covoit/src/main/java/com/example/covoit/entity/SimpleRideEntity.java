@@ -1,9 +1,10 @@
 package com.example.covoit.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 @Entity
 
@@ -16,18 +17,23 @@ public class SimpleRideEntity {
     @Column(name="id")
     private Integer id;
 
+
     @Column(name="date_Aller")
     private LocalDate dateAller;
 
+    @JsonFormat(pattern="hh:mm")
     @Column(name="time_Aller")
     private LocalTime timeAller;
 
+    @JsonFormat(pattern="hh:mm")
     @Column(name="time_Retour")
     private LocalTime timeRetour;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_ride_id")
     private RideEntity simpleRide;
+
 
 
     public Integer getId() {
