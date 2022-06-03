@@ -22,7 +22,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userRepository.findUserByUsername(username);
-
         if (user == null)
             throw new UsernameNotFoundException("Bad credentials");
 //
