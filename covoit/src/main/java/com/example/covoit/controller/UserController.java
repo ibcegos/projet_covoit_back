@@ -44,4 +44,11 @@ public class UserController {
         return service.validateAccountService(dto);
     }
 
+    @PostMapping("get_user_by_username")
+    public UserDto getUserByUsername(@RequestParam String username) {
+        return service.loadUserByUsername(username);
+
+    }
+
+
 }

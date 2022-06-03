@@ -1,14 +1,34 @@
 package com.example.covoit.dto;
 
+import com.example.covoit.entity.ERole;
+
 public class RoleDto {
+    private Long id;
 
-    private String libelle;
+    private ERole name;
 
-    public String getLibelle() {
-        return libelle;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public ERole getName() {
+        return name;
+    }
+
+    public void setName(ERole name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "RoleDto{" +
+                "id=" + id +
+                ", name=" + name +
+                '}';
     }
 }

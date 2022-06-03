@@ -2,17 +2,19 @@ package com.example.covoit.service;
 
 import com.example.covoit.dto.RoleDto;
 import com.example.covoit.dto.UserDto;
-import com.example.covoit.entity.DriversEntity;
+import com.example.covoit.entity.ERole;
 import com.example.covoit.entity.RoleEntity;
 import com.example.covoit.entity.UserEntity;
+import com.example.covoit.repository.IRoleRepository;
 import com.example.covoit.repository.IUserRepository;
-import org.apache.catalina.Role;
-import org.apache.catalina.User;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -21,22 +23,30 @@ public class UserService implements IUserService {
     @Autowired
     public IUserRepository repository;
 
+    @Autowired
+    public IRoleRepository roleRepository;
+
+
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
+
     @Override
     public UserDto toDto(UserEntity entity) {
         UserDto dto = new UserDto();
         RoleDto roleDto = new RoleDto();
-        roleDto.setLibelle(entity.getRole().getTitle());
+        BeanUtils.copyProperties(entity, dto);
+
 
         dto.setId(entity.getId());
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
-        dto.setPseudo(entity.getPseudo());
+        dto.setUsername(entity.getUsername());
         dto.setPassword(entity.getPassword());
         dto.setEmail(entity.getEmail());
         dto.setConnect(entity.getConnect());
         dto.setPhoneNumber(entity.getPhoneNumber());
         dto.setAvatar(entity.getAvatar());
-        dto.setRole(roleDto);
+        dto.setRoles(entity.getRoles());
         dto.setVerified(entity.getVerified());
         dto.setCreatedAt(entity.getCreatedAt());
         return dto;
@@ -45,8 +55,9 @@ public class UserService implements IUserService {
     @Override
     public UserEntity toEntity(UserDto dto) {
         RoleEntity userRole = new RoleEntity();
-        userRole.setTitle("User");
-        userRole.setId(1);
+        BeanUtils.copyProperties(dto, userRole);
+        userRole.setName(ERole.User);
+        userRole.setId(1L);
 
         UserEntity entity = new UserEntity();
 
@@ -55,11 +66,12 @@ public class UserService implements IUserService {
         }
         entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
-        entity.setPseudo(dto.getPseudo());
+        entity.setUsername(dto.getUsername());
         entity.setEmail(dto.getEmail());
         entity.setConnect(false);
         entity.setPhoneNumber(dto.getPhoneNumber());
-        entity.setRole(userRole);
+        entity.setRoles(Collections.singleton(userRole));
+
         entity.setPassword(dto.getPassword());
         entity.setAvatar(dto.getAvatar());
         entity.setVerified(false);
@@ -72,6 +84,8 @@ public class UserService implements IUserService {
         UserEntity entity = this.toEntity(dto);
         entity.setCreatedAt(LocalDateTime.now());
         try {
+//            String psswd = dto.getPassword();
+//            dto.setPassword(passwordEncoder.encode(psswd));
             repository.saveAndFlush(entity);
             return entity.getId();
         } catch(Exception e) {
@@ -119,6 +133,19 @@ public class UserService implements IUserService {
 
         return returnDto;
     }
+
+    @Override
+    public UserDto loadUserByUsername(String username) {
+        UserEntity user = repository.findUserByUsername(username);
+        return this.toDto(user);
+
+    }
+
+
+
+
+//        return this.toDto((UserEntity) repository.findUserByPseudo(pseudo));
+
 
 
 }

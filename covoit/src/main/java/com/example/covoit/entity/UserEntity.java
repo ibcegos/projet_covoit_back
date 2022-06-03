@@ -1,8 +1,14 @@
 package com.example.covoit.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -11,7 +17,7 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="id_User")
     private Integer id;
 
     @Column(name="last_name")
@@ -20,18 +26,23 @@ public class UserEntity {
     @Column(name="first_name")
     private String firstName;
 
-    @Column(name="pseudo")
-    private String pseudo;
+    @Column(name="username")
+    private String username;
 
+    @Size(max = 120)
     @Column(name="password")
     private String password;
 
     @Column(name="email")
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_role_id")
-    private RoleEntity role;
+
+    @ManyToMany
+    @JoinTable( name = "UserRoles",
+            joinColumns = @JoinColumn(name = "id_User"),
+            inverseJoinColumns = @JoinColumn(name = "id_Role"))
+    private Set<RoleEntity> roles = new HashSet<>();
+
 
     @OneToMany(mappedBy = "user")
     private List<DriversEntity> driversList;
@@ -60,6 +71,15 @@ public class UserEntity {
     @Column(name="deleted_at")
     private LocalDateTime deletedAt;
 
+    public UserEntity(String username, String password) {
+        this.username = username;
+        this.password = password;
+
+    }
+
+    public UserEntity() {
+    }
+
     public Integer getId() {
         return id;
     }
@@ -84,12 +104,12 @@ public class UserEntity {
         this.firstName = firstName;
     }
 
-    public String getPseudo() {
-        return pseudo;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -108,12 +128,16 @@ public class UserEntity {
         this.email = email;
     }
 
-    public RoleEntity getRole() {
-        return role;
+    public Set<RoleEntity> getRoles() {
+        return roles;
     }
 
-    public void setRole(RoleEntity role) {
-        this.role = role;
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
+    }
+
+    public List<DriversEntity> getDriversList() {
+        return driversList;
     }
 
     public Boolean getConnect() {
@@ -190,11 +214,11 @@ public class UserEntity {
                 "id=" + id +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", pseudo='" + pseudo + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", role=" + role +
-                ", driverList=" + driversList +
+                ", roles=" + roles +
+                ", driversList=" + driversList +
                 ", riderList=" + riderList +
                 ", isConnect=" + isConnect +
                 ", phoneNumber='" + phoneNumber + '\'' +
@@ -205,4 +229,5 @@ public class UserEntity {
                 ", deletedAt=" + deletedAt +
                 '}';
     }
+
 }

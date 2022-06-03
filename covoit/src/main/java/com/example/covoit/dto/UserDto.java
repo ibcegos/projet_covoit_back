@@ -1,18 +1,25 @@
 package com.example.covoit.dto;
 
 import com.example.covoit.entity.RoleEntity;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserDto {
 
     private Integer id;
     private String lastName;
     private String firstName;
-    private String pseudo;
+    private String username;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String email;
-    private RoleDto role;
+    private Set<RoleEntity> roles = new HashSet<>();
     private Boolean isConnect;
     private String phoneNumber;
     private String avatar;
@@ -52,12 +59,12 @@ public class UserDto {
         this.firstName = firstName;
     }
 
-    public String getPseudo() {
-        return pseudo;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -92,13 +99,7 @@ public class UserDto {
         this.avatar = avatar;
     }
 
-    public RoleDto getRole() {
-        return role;
-    }
 
-    public void setRole(RoleDto role) {
-        this.role = role;
-    }
 
     public Boolean getVerified() {
         return verified;
@@ -116,20 +117,29 @@ public class UserDto {
         this.createdAt = createdAt;
     }
 
+    public Set<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "UserDto{" +
                 "id=" + id +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", pseudo='" + pseudo + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
+                ", roles=" + roles +
                 ", isConnect=" + isConnect +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", verified=" + verified +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }
