@@ -38,7 +38,7 @@ public class UserEntity {
 
 
     @ManyToMany
-    @JoinTable( name = "UserRoles",
+    @JoinTable( name = "users_roles",
             joinColumns = @JoinColumn(name = "id_User"),
             inverseJoinColumns = @JoinColumn(name = "id_Role"))
     private Set<RoleEntity> roles = new HashSet<>();
