@@ -2,6 +2,7 @@ package com.example.covoit.dto;
 
 import com.example.covoit.entity.SimpleRideEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RideDto {
@@ -12,8 +13,8 @@ public class RideDto {
     private String vehicule_type;
     private Integer seats;
     private String rideType;
-    private List<SimpleRideDto> simpleList;
-    private List<RecurrentRideDto> recurrentList;
+    private List<SimpleRideDto> simpleList = new ArrayList<>();
+    private List<RecurrentRideDto> recurrentList = new ArrayList<>();
 //    private List<DriverDto> driverList;
 
     public Integer getId() {

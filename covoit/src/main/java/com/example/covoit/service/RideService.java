@@ -3,14 +3,20 @@ package com.example.covoit.service;
 import com.example.covoit.dto.RecurrentRideDto;
 import com.example.covoit.dto.RideDto;
 import com.example.covoit.dto.SimpleRideDto;
+import com.example.covoit.dto.UserDto;
 import com.example.covoit.entity.RecurrentRideEntity;
 import com.example.covoit.entity.RideEntity;
+import com.example.covoit.entity.SimpleRideEntity;
+import com.example.covoit.entity.UserEntity;
+import com.example.covoit.repository.IRecurrentRepository;
 import com.example.covoit.repository.IRideRepository;
+import com.example.covoit.repository.ISimpleRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -19,6 +25,11 @@ public class RideService implements IRideService {
     @Autowired
     public IRideRepository rideRepository;
 
+    @Autowired
+    public ISimpleRepository simpleRepository;
+
+    @Autowired
+    public IRecurrentRepository recurrentRepository;
     @Override
     public RideDto toDto(RideEntity entity) {
         RideDto dto = new RideDto();
@@ -69,24 +80,90 @@ public class RideService implements IRideService {
         }
         return listAllRide;
     }
+
+ //------------- Proposition de trajet --------------------//
+
+    //-----Création et sauvegarde d'une entité de trajet-----//
+    @Override
+    public Integer createRide(RideDto dto) {
+        RideEntity entity = this.toEntity(dto);
+        List<SimpleRideEntity> simple = entity.getSimpleList();
+        List<RecurrentRideEntity> recurrent = entity.getRecurrentList();
+        entity.setCreatedAt(LocalDateTime.now());
+        try {
+            rideRepository.saveAndFlush(entity);
+            for (int i = 0;i< simple.size();i++){
+                simpleRepository.saveAndFlush(simple.get(i));
+            }
+            for (int i = 0;i< recurrent.size();i++){
+                if (null != recurrent.get(i).getTimeAller()) {
+                    recurrentRepository.saveAndFlush(recurrent.get(i));
+                }
+            }
+            return entity.getId();
+        } catch(Exception e) {
+            return null;
+        }
+    }
+    //-----Passage d'un dto à une entité-----//
+    @Override
+    public RideEntity toEntity(RideDto dto) {
+        RideEntity entity = new RideEntity();
+        entity.setDeparture(dto.getDeparture());
+        entity.setDestination("Boulot !");
+        entity.setSeats(dto.getSeats());
+        entity.setVehicleType(dto.getVehicule_type());
+        entity.setRideType(dto.getRideType());
+
+        //--------------------Trajet Simple----------//
+
+        List<SimpleRideEntity> simpleRideList = new ArrayList();
+
+        for (int i = 0; i < dto.getSimpleList().size(); i++) {
+            SimpleRideEntity simpleRide = new SimpleRideEntity();
+            simpleRide.setSimpleRide(entity);
+            simpleRide.setDateAller(dto.getSimpleList().get(i).getDateAller());
+            simpleRide.setTimeAller(dto.getSimpleList().get(i).getTimeAller());
+            simpleRide.setTimeRetour(dto.getSimpleList().get(i).getTimeRetour());
+
+            simpleRideList.add(simpleRide);
+        }
+        entity.setSimpleList(simpleRideList);
+
+        //--------------------Trajet Récurrent----------//
+
+        List<RecurrentRideEntity> recurrentRideList = new ArrayList();
+
+        for (int i = 0; i < dto.getRecurrentList().size(); i++) {
+
+            RecurrentRideEntity recurrentRide = new RecurrentRideEntity();
+            recurrentRide.setRecurrentRide(entity);
+            recurrentRide.setJourAller(dto.getRecurrentList().get(i).getJourAller());
+            recurrentRide.setTimeAller(dto.getRecurrentList().get(i).getTimeAller());
+            recurrentRide.setTimeRetour(dto.getRecurrentList().get(i).getTimeRetour());
+            recurrentRideList.add(i, recurrentRide);
+        }
+        entity.setRecurrentList(recurrentRideList);
+
+        return entity;
+    }
+
+
+
+
+
+
+
+
+
 }
 
 
 
-//    @Override
-//    public RideEntity toEntity(RideDto dto) {
-//        RideEntity entity = new RideEntity();
-//        entity.setDeparture(dto.getDeparture());
-//        entity.setDestination(dto.getDestination());
-//        entity.setDateAller(dto.getDateAller());
-//        entity.setRideType(dto.getRideType());
-//        entity.setTimeRetour(dto.getTimeRetour());
-//        entity.setTimeAller(dto.getTimeAller());
-//        return entity;
-//    }
 
 
-//
+
+
 
 
 

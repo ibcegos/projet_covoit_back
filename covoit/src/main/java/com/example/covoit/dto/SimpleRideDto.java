@@ -9,9 +9,9 @@ public class SimpleRideDto {
 
     private Integer id;
     private LocalDate dateAller;
-    @JsonFormat(pattern="hh:mm")
+//    @JsonFormat(pattern="hh:mm")
     private LocalTime timeAller;
-    @JsonFormat(pattern="hh:mm")
+//    @JsonFormat(pattern="hh:mm")
     private LocalTime timeRetour;
 
 //    private RideDto ride;
