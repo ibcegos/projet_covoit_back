@@ -11,7 +11,7 @@ public class RoleService implements IRoleService {
     @Override
     public RoleDto toDto(RoleEntity entity) {
         RoleDto dto = new RoleDto();
-        dto.setLibelle(entity.getTitle());
+        dto.setRoleName(entity.getRoleName());
         return dto;
     }
 

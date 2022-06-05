@@ -2,13 +2,23 @@ package com.example.covoit.dto;
 
 public class RoleDto {
 
-    private String libelle;
+    private Integer id;
 
-    public String getLibelle() {
-        return libelle;
+    private String roleName;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

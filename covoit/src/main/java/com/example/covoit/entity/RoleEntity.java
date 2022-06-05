@@ -10,14 +10,12 @@ public class RoleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="id_Role")
     private Integer id;
 
     @Column(name="title")
-    private String title;
+    private String roleName;
 
-    @OneToMany(mappedBy = "role")
-    private List<UserEntity> userList;
 
     @Column(name="created_at")
     private LocalDateTime createdAt;
@@ -36,12 +34,12 @@ public class RoleEntity {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -68,20 +66,12 @@ public class RoleEntity {
         this.deletedAt = deletedAt;
     }
 
-    public List<UserEntity> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<UserEntity> userList) {
-        this.userList = userList;
-    }
 
     @Override
     public String toString() {
         return "RoleEntity{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
-                ", userList=" + userList +
+                ", roleName='" + roleName + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", deletedAt=" + deletedAt +
