@@ -38,10 +38,6 @@ public class UserController {
     @GetMapping("get_user")
     public List<UserDto> getUserToValidate() { return service.getUserToValidate(); }
 
-    @PostMapping("validate_account")
-    public UserDto validateAccount(@RequestBody UserDto dto) {
 
-        return service.validateAccountService(dto);
-    }
 
 }

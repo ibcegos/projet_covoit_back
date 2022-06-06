@@ -8,32 +8,27 @@ import com.example.covoit.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.relation.Role;
 import java.util.List;
 
 @RestController
-@RequestMapping("Covoit")
-public class AccountController {
+@RequestMapping("Covoit/user/")
+@CrossOrigin(origins = "http://localhost:4200")
+public class AccountUserController {
 
     @Autowired
     private AccountService service;
 
-    @GetMapping("/users")
-    public List<UserDto> users() {
-        return service.listUsers();
-    }
-
-    @PostMapping("/users")
+    @PostMapping("add_user")
     public UserEntity addUser(@RequestBody UserDto user) {
         return service.addNewUser(user);
     }
 
-    @PostMapping("/roles")
+    @PostMapping("roles")
     public RoleEntity addRole(@RequestBody RoleEntity role) {
         return service.addNewRole(role);
     }
 
-    @PostMapping("/addRoleToUser")
+    @PostMapping("addRoleToUser")
     public void addRoleToUser(@RequestBody RoleUserForm form) {
         service.addRoleToUser(form.getUsername(), form.getRoleName());
     }

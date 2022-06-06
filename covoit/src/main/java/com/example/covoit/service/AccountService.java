@@ -106,8 +106,8 @@ private PasswordEncoder passwordEncoder;
 
         entity.setCreatedAt(LocalDateTime.now());
         try {
-            String pw=user.getPassword();
-            user.setPassword(passwordEncoder.encode(pw));
+            String pw=entity.getPassword();
+            entity.setPassword(passwordEncoder.encode(pw));
             userRepository.saveAndFlush(entity);
             return entity;
         } catch(Exception e) {
@@ -141,6 +141,20 @@ private PasswordEncoder passwordEncoder;
         }
         return listAllUser;
 
+    }
+
+
+    @Override
+    public UserDto validateAccountService(UserDto dto) {
+        UserEntity entity = this.toEntity(dto);
+        entity.setVerified(true);
+
+        userRepository.saveAndFlush(entity);
+
+        UserDto returnDto = new UserDto();
+        returnDto = this.toDto(entity);
+
+        return returnDto;
     }
 }
 
