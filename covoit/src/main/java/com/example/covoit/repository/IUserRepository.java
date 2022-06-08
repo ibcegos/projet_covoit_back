@@ -14,5 +14,7 @@ public interface IUserRepository extends JpaRepository<UserEntity, Integer> {
     List<UserEntity> findByUserNoValidate();
 
     UserEntity findByUsername(String username);
+
+    
 }
 

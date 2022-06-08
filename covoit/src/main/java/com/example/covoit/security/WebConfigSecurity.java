@@ -63,6 +63,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/Covoit/login/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/login/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/admin/validate_account").hasAuthority("Admin");
 
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/user/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/Covoit/getAllUser").hasAuthority("User");
