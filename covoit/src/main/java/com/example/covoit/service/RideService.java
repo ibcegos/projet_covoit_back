@@ -43,6 +43,7 @@ public class RideService implements IRideService {
 
         List<SimpleRideDto> simpleRideList = new ArrayList();
         SimpleRideDto simpleRide = new SimpleRideDto();
+
         for (int i = 0; i < entity.getSimpleList().size(); i++) {
             simpleRide.setDateAller(entity.getSimpleList().get(i).getDateAller());
             simpleRide.setTimeAller(entity.getSimpleList().get(i).getTimeAller());
@@ -51,13 +52,9 @@ public class RideService implements IRideService {
         }
         dto.setSimpleList(simpleRideList);
 
-
         List<RecurrentRideDto> recurrentRideList = new ArrayList();
 
-//       
-
         for (int i = 0; i < entity.getRecurrentList().size(); i++) {
-
             RecurrentRideDto recurrentRide = new RecurrentRideDto();
             recurrentRide.setJourAller(entity.getRecurrentList().get(i).getJourAller());
             recurrentRide.setTimeAller(entity.getRecurrentList().get(i).getTimeAller());
@@ -149,20 +146,7 @@ public class RideService implements IRideService {
     }
 
 
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
 
 
 
