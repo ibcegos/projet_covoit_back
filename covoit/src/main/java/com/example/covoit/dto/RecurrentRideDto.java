@@ -9,9 +9,9 @@ public class RecurrentRideDto {
     private Integer id;
     private String jourAller;
 
-    @JsonFormat(pattern="hh:mm")
+//    @JsonFormat(pattern="hh:mm")
     private LocalTime timeAller;
-    @JsonFormat(pattern="hh:mm")
+//    @JsonFormat(pattern="hh:mm")
     private LocalTime timeRetour;
 
 

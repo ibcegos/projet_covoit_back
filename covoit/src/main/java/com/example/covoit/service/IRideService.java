@@ -2,6 +2,7 @@ package com.example.covoit.service;
 
 import com.example.covoit.dto.RecurrentRideDto;
 import com.example.covoit.dto.RideDto;
+import com.example.covoit.dto.UserDto;
 import com.example.covoit.entity.DriversEntity;
 import com.example.covoit.entity.RecurrentRideEntity;
 import com.example.covoit.entity.RideEntity;
@@ -18,5 +19,9 @@ public interface IRideService {
 
     List<RideDto> getRides();
 
+
+    Integer createRide(RideDto dto);
+
+    RideEntity toEntity(RideDto dto);
 
 }
