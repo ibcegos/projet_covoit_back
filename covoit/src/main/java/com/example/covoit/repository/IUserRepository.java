@@ -12,5 +12,7 @@ public interface IUserRepository extends JpaRepository<UserEntity, Integer> {
 
     @Query(value = "SELECT * FROM Users u WHERE u.verified = 0 " , nativeQuery = true )
     List<UserEntity> findByUserNoValidate();
+
+    UserEntity findByUsername(String username);
 }
 

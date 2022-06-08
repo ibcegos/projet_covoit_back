@@ -3,16 +3,18 @@ package com.example.covoit.dto;
 import com.example.covoit.entity.RoleEntity;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 
 public class UserDto {
 
     private Integer id;
     private String lastName;
     private String firstName;
-    private String pseudo;
+    private String username;
     private String password;
     private String email;
-    private RoleDto role;
+    private List<RoleDto> role;
     private Boolean isConnect;
     private String phoneNumber;
     private String avatar;
@@ -52,12 +54,11 @@ public class UserDto {
         this.firstName = firstName;
     }
 
-    public String getPseudo() {
-        return pseudo;
+    public String getUsername() {
+        return username;
     }
-
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -92,11 +93,11 @@ public class UserDto {
         this.avatar = avatar;
     }
 
-    public RoleDto getRole() {
+    public List<RoleDto> getRole() {
         return role;
     }
 
-    public void setRole(RoleDto role) {
+    public void setRole(List<RoleDto> role) {
         this.role = role;
     }
 
@@ -122,7 +123,7 @@ public class UserDto {
                 "id=" + id +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", pseudo='" + pseudo + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +

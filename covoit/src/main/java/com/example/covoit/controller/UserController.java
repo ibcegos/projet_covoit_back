@@ -18,7 +18,7 @@ public class UserController {
     private IUserService service;
 
     //pas utilisé
-    @GetMapping("getAllUser")
+    @GetMapping("/getAllUser")
     public List<UserDto> getAllUser() {
         return service.getAllUser();
     }
@@ -35,13 +35,9 @@ public class UserController {
         return new ResponseEntity(id, HttpStatus.CREATED);
     }
 
-    @GetMapping("get_user")
+    @GetMapping("/get_user")
     public List<UserDto> getUserToValidate() { return service.getUserToValidate(); }
 
-    @PostMapping("validate_account")
-    public UserDto validateAccount(@RequestBody UserDto dto) {
 
-        return service.validateAccountService(dto);
-    }
 
 }

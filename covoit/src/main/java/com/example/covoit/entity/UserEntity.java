@@ -2,6 +2,7 @@ package com.example.covoit.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -11,7 +12,7 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="id_User")
     private Integer id;
 
     @Column(name="last_name")
@@ -21,7 +22,8 @@ public class UserEntity {
     private String firstName;
 
     @Column(name="username")
-    private String pseudo;
+    private String username;
+
 
     @Column(name="password")
     private String password;
@@ -29,9 +31,10 @@ public class UserEntity {
     @Column(name="email")
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_role_id")
-    private RoleEntity role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "id_User"), inverseJoinColumns = @JoinColumn(name = "id_Role"))
+    private List<RoleEntity> roles;
+
 
     @OneToMany(mappedBy = "user")
     private List<DriversEntity> driversList;
@@ -84,12 +87,12 @@ public class UserEntity {
         this.firstName = firstName;
     }
 
-    public String getPseudo() {
-        return pseudo;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -108,13 +111,7 @@ public class UserEntity {
         this.email = email;
     }
 
-    public RoleEntity getRole() {
-        return role;
-    }
 
-    public void setRole(RoleEntity role) {
-        this.role = role;
-    }
 
     public Boolean getConnect() {
         return isConnect;
@@ -184,17 +181,29 @@ public class UserEntity {
         this.riderList = riderList;
     }
 
+    public List<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
+    }
+
+    public List<DriversEntity> getDriversList() {
+        return driversList;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
                 "id=" + id +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", pseudo='" + pseudo + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", role=" + role +
-                ", driverList=" + driversList +
+                ", roles=" + roles +
+                ", driversList=" + driversList +
                 ", riderList=" + riderList +
                 ", isConnect=" + isConnect +
                 ", phoneNumber='" + phoneNumber + '\'' +
