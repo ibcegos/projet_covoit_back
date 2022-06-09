@@ -8,9 +8,7 @@ import com.example.covoit.entity.RecurrentRideEntity;
 import com.example.covoit.entity.RideEntity;
 import com.example.covoit.entity.SimpleRideEntity;
 import com.example.covoit.entity.UserEntity;
-import com.example.covoit.repository.IRecurrentRepository;
-import com.example.covoit.repository.IRideRepository;
-import com.example.covoit.repository.ISimpleRepository;
+import com.example.covoit.repository.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +28,15 @@ public class RideService implements IRideService {
 
     @Autowired
     public IRecurrentRepository recurrentRepository;
+
+    @Autowired
+    public IDriverRepository driverRepository;
+
+    @Autowired
+    public IUserRepository userRepository;
+
+
+
     @Override
     public RideDto toDto(RideEntity entity) {
         RideDto dto = new RideDto();
@@ -144,8 +151,46 @@ public class RideService implements IRideService {
 
         return entity;
     }
+//--------------------Récupérer les trajets d'un utilisateur pour l'afficher dans son profil-----------------//
+    @Override
+    public List<RideDto> getRides(String currentusername) {
+        List<RideEntity> simpleRideList = rideRepository.findSimpleRideByUsername(currentusername);
+        List<RideEntity> recurrentRideList = rideRepository.findRecurrentRideByUsername(currentusername);
 
+        List<RideDto> listAllRide = new ArrayList<>();
 
+        for (RideEntity entity : simpleRideList) {
+            RideDto dto = this.toDto(entity);
+            listAllRide.add(dto);
+        }
+        for (RideEntity entity : recurrentRideList) {
+            RideDto dto = this.toDto(entity);
+            listAllRide.add(dto);
+        }
+        return listAllRide;
+    }
+
+//---------------Supprimer un trajet ---------------------//
+
+    @Override
+    public RideDto deleteRideService(Integer id) {
+        RideEntity entity = new RideEntity();
+        entity = rideRepository.getRideById(id);
+        RideDto dto = new RideDto();
+        dto = toDto(entity);
+
+        for(int i = 0 ; i < entity.getRecurrentList().size() ; i++){
+                recurrentRepository.deleteById(entity.getRecurrentList().get(i).getId());
+        }
+        for(int i = 0 ; i < entity.getSimpleList().size() ; i++){
+            simpleRepository.deleteById(entity.getSimpleList().get(i).getId());
+        }
+        for(int i = 0 ; i < entity.getDriverList().size() ; i++){
+            driverRepository.deleteById(entity.getDriverList().get(i).getId());
+        }
+        rideRepository.deleteById(id);
+        return dto;
+    }
 }
 
 

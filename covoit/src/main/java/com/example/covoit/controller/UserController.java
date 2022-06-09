@@ -1,5 +1,6 @@
 package com.example.covoit.controller;
 
+import com.example.covoit.dto.RideDto;
 import com.example.covoit.dto.UserDto;
 import com.example.covoit.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,11 @@ public class UserController {
     @GetMapping("/get_user")
     public List<UserDto> getUserToValidate() { return service.getUserToValidate(); }
 
+    @GetMapping("getUserProfil/{username}")
+    public UserDto getProfil(@PathVariable String username) {
+
+        return service.getUserProfil(username);
+    }
 
 
 }

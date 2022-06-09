@@ -66,7 +66,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/user/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/Covoit/getAllUser").hasAuthority("User");
-
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/Covoit/**").permitAll();
 
         http.headers().frameOptions().disable();
         http.authorizeRequests().anyRequest().authenticated();

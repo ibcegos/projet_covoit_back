@@ -30,9 +30,11 @@ public class UserService implements IUserService {
 //            roleDto.setId(roleEntity.getId());
 //            roleDto.setRoleName(roleEntity.getRoleName());
 //        }
-        roleDto.setRoleName(entity.getRoles().toString());
-
+        if (dto.getId() != null) {
+            roleDto.setRoleName(entity.getRoles().toString());
+        }
         dto.setId(entity.getId());
+
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setUsername(entity.getUsername());
@@ -125,5 +127,12 @@ public class UserService implements IUserService {
         return returnDto;
     }
 
+    public UserDto getUserProfil(String username) {
+        UserEntity entity = repository.findProfilByUsername(username);
+        UserDto dto = new UserDto();
 
+        dto = this.toDto(entity);
+
+        return dto;
+    }
 }

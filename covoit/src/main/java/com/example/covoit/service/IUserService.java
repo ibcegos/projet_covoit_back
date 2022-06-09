@@ -20,4 +20,6 @@ public interface IUserService {
     List<UserDto> getUserToValidate();
 
     UserDto validateAccountService(UserDto dto);
+
+    public UserDto getUserProfil(String username);
 }

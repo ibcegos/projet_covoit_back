@@ -24,4 +24,7 @@ public interface IRideService {
 
     RideEntity toEntity(RideDto dto);
 
+    List<RideDto> getRides(String currentusername);
+
+    public RideDto deleteRideService(Integer id);
 }

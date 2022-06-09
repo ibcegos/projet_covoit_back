@@ -28,7 +28,6 @@ public class RideController {
 
     @PostMapping("addRide")
     public ResponseEntity addRide(@RequestBody RideDto dto) {
-        System.out.println(dto);
         Integer id = service.createRide(dto);
 
         if (id == null) {
@@ -38,5 +37,14 @@ public class RideController {
         return new ResponseEntity(id, HttpStatus.CREATED);
     }
 
+    @GetMapping("getRideHistorique/{currentusername}")
+    public List<RideDto> getRides(@PathVariable String currentusername){
+        return service.getRides(currentusername);
+    }
 
+    @DeleteMapping("delete_ride/{id}")
+    public RideDto deleteUser(@PathVariable String id ) {
+        Integer ID = Integer.parseInt(id);
+        return service.deleteRideService(ID);
+    }
 }
