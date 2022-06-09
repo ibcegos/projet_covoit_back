@@ -11,6 +11,8 @@ public interface IDriverService {
 
     //List<DriverDto> getDrivers();
 
+    List<DriversEntity> getDriverRide();
+
     DriversEntity toEntity(DriverDto dto);
 }
 

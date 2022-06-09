@@ -1,5 +1,6 @@
 package com.example.covoit.controller;
 
+import com.example.covoit.dto.RideDto;
 import com.example.covoit.dto.UserDto;
 import com.example.covoit.service.IUserService;
 import com.example.covoit.service.UserService;
@@ -31,6 +32,11 @@ public class UserController {
 //    }
 
 
+    @GetMapping("getUserProfil/{username}")
+    public UserDto getProfil(@PathVariable String username) {
+
+        return service.getUserProfil(username);
+    }
 
 
 }

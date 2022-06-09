@@ -13,11 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -70,10 +67,6 @@ private PasswordEncoder passwordEncoder;
 
     @Override
     public UserEntity toEntity(UserDto dto) {
-        RoleEntity userRole = new RoleEntity();
-//        userRole.setRoleName("User");
-//        userRole.setId(1);
-
         UserEntity entity = new UserEntity();
 
         if (dto.getId() != null) {
@@ -85,9 +78,6 @@ private PasswordEncoder passwordEncoder;
         entity.setEmail(dto.getEmail());
         entity.setConnect(false);
         entity.setPhoneNumber(dto.getPhoneNumber());
-//        List<RoleEntity> listRoleEntity = new ArrayList<>();
-//        listRoleEntity.add(userRole);
-//        entity.setRoles(listRoleEntity);
         entity.setPassword(dto.getPassword());
         entity.setAvatar(dto.getAvatar());
         entity.setVerified(false);
@@ -206,7 +196,6 @@ private PasswordEncoder passwordEncoder;
     public List<ContactEntity> getAllContact() {
         return contactRepository.findAll();
     }
-
 
 }
 

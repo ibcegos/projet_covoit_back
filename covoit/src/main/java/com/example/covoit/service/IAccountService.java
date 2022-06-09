@@ -36,4 +36,5 @@ public interface IAccountService {
     void sendMessage(ContactEntity contact);
 
     List<ContactEntity> getAllContact();
+
 }

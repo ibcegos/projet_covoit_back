@@ -17,11 +17,20 @@ public interface IRideService {
 
     // RideEntity toEntity(RideDto dto);
 
+    RideDto toDtoConnected(RideEntity entity);
+
     List<RideDto> getRides();
 
 
     Integer createRide(RideDto dto);
 
     RideEntity toEntity(RideDto dto);
+
+
+    List<RideDto> getRides(String currentusername);
+
+    public RideDto deleteRideService(Integer id);
+
+//    List<RideDto> getRidesByUser();
 
 }
