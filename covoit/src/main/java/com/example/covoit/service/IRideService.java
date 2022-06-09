@@ -17,6 +17,8 @@ public interface IRideService {
 
     // RideEntity toEntity(RideDto dto);
 
+    RideDto toDtoConnected(RideEntity entity);
+
     List<RideDto> getRides();
 
 
@@ -24,4 +26,5 @@ public interface IRideService {
 
     RideEntity toEntity(RideDto dto);
 
+//    List<RideDto> getRidesByUser();
 }

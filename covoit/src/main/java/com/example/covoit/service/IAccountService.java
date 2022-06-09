@@ -23,4 +23,6 @@ public interface IAccountService {
     UserEntity toEntity(UserDto dto);
 
     UserDto validateAccountService(UserDto dto);
+
+
 }

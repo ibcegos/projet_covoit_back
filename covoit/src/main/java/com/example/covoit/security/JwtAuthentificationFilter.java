@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -69,14 +70,14 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
         String jwtAccessToken= JWT.create()
                 .withIssuer(request.getRequestURI())
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis()+15354*60*1000))
-                .withClaim("roles",user.getAuthorities().stream().map(a->a.getAuthority()).collect(Collectors.toList()))
+                .withExpiresAt(new Date(System.currentTimeMillis()+60*60*1000))
+                .withClaim("roles",user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
 
         String jwtRefreshToken= JWT.create()
                 .withIssuer(request.getRequestURI())
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis()+1*60*1000))
+                .withExpiresAt(new Date(System.currentTimeMillis()+20*60*1000))
                 .sign(algorithm);
         Map<String, String> idToken= new HashMap<>();
         idToken.put("accessToken",jwtAccessToken);

@@ -1,5 +1,6 @@
 package com.example.covoit.dto;
 
+import com.example.covoit.entity.DriversEntity;
 import com.example.covoit.entity.SimpleRideEntity;
 
 import java.util.ArrayList;
@@ -13,9 +14,10 @@ public class RideDto {
     private String vehicule_type;
     private Integer seats;
     private String rideType;
+    private List<DriverDto> driversList=new ArrayList<>();
     private List<SimpleRideDto> simpleList = new ArrayList<>();
     private List<RecurrentRideDto> recurrentList = new ArrayList<>();
-//    private List<DriverDto> driverList;
+
 
     public Integer getId() {
         return id;
@@ -81,13 +83,14 @@ public class RideDto {
         this.rideType = rideType;
     }
 
-//    public List<DriverDto> getDriverList() {
-//        return driverList;
-//    }
-//
-//    public void setDriverList(List<DriverDto> driverList) {
-//        this.driverList = driverList;
-//    }
+
+    public List<DriverDto> getDriversList() {
+        return driversList;
+    }
+
+    public void setDriversList(List<DriverDto> driversList) {
+        this.driversList = driversList;
+    }
 
     @Override
     public String toString() {
@@ -98,9 +101,9 @@ public class RideDto {
                 ", vehicule_type='" + vehicule_type + '\'' +
                 ", seats=" + seats +
                 ", rideType='" + rideType + '\'' +
+                ", driversList=" + driversList +
                 ", simpleList=" + simpleList +
                 ", recurrentList=" + recurrentList +
-//                ", driverList=" + driverList +
                 '}';
     }
 }

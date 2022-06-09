@@ -38,5 +38,11 @@ public class RideController {
         return new ResponseEntity(id, HttpStatus.CREATED);
     }
 
+//    @GetMapping("get_user_ride")
+//    public List<RideDto> getUserRide() {
+//        return service.getRidesByUser();
+//
+//    }
+
 
 }

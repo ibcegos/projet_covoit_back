@@ -1,15 +1,12 @@
 package com.example.covoit.service;
 
 import com.example.covoit.dto.DriverDto;
-import com.example.covoit.dto.RideDto;
-import com.example.covoit.dto.UserDto;
 import com.example.covoit.entity.DriversEntity;
 import com.example.covoit.repository.IDriverRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,6 +14,15 @@ public class DriverService implements  IDriverService {
 
     @Autowired
     public IDriverRepository driverRepository;
+
+
+    @Override
+    public List<DriversEntity> getDriverRide() {
+
+
+        return driverRepository.findDriverByUsername();
+
+    }
 
 //    @Override
 //    public DriverDto toDto(DriversEntity entity) {
