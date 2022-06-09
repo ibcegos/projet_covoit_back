@@ -22,4 +22,5 @@ public interface IUserService {
     UserDto validateAccountService(UserDto dto);
 
     public UserDto getUserProfil(String username);
+
 }

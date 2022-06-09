@@ -2,12 +2,9 @@ package com.example.covoit.service;
 
 import com.example.covoit.dto.RoleDto;
 import com.example.covoit.dto.UserDto;
-import com.example.covoit.entity.DriversEntity;
 import com.example.covoit.entity.RoleEntity;
 import com.example.covoit.entity.UserEntity;
 import com.example.covoit.repository.IUserRepository;
-import org.apache.catalina.Role;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -135,4 +132,5 @@ public class UserService implements IUserService {
 
         return dto;
     }
+
 }

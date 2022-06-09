@@ -37,10 +37,12 @@ public class RideController {
         return new ResponseEntity(id, HttpStatus.CREATED);
     }
 
+
     @GetMapping("getRideHistorique/{currentusername}")
     public List<RideDto> getRides(@PathVariable String currentusername){
         return service.getRides(currentusername);
     }
+
 
     @DeleteMapping("delete_ride/{id}")
     public RideDto deleteUser(@PathVariable String id ) {

@@ -16,6 +16,7 @@ public interface IRideRepository extends JpaRepository<RideEntity, Integer> {
             "INNER JOIN Users u ON u.id_user = d.FK_user_id WHERE u.username=?", nativeQuery = true)
     List<RideEntity> findSimpleRideByUsername(String username);
 
+
     @Query(value = "SELECT * FROM Rides r " +
             "INNER JOIN Recurrents rec ON rec.FK_ride_id = r.id " +
             "INNER JOIN Drivers d ON d.FK_ride_id = r.id " +
@@ -24,4 +25,8 @@ public interface IRideRepository extends JpaRepository<RideEntity, Integer> {
 
     @Query(value = "SELECT * FROM Rides r WHERE r.id = ? " , nativeQuery = true )
     RideEntity getRideById(Integer id);
+
+
+
+
 }

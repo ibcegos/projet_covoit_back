@@ -71,38 +71,6 @@ public class RideEntity {
         this.destination = destination;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public LocalDateTime getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(LocalDateTime deletedAt) {
-        this.deletedAt = deletedAt;
-    }
-
-    public List<DriversEntity> getDriverList() {
-        return driversList;
-    }
-
-    public void setDriverList(List<DriversEntity> driversList) {
-        this.driversList = driversList;
-    }
-
     public String getVehicleType() {
         return vehicleType;
     }
@@ -117,6 +85,14 @@ public class RideEntity {
 
     public void setSeats(Integer seats) {
         this.seats = seats;
+    }
+
+    public String getRideType() {
+        return rideType;
+    }
+
+    public void setRideType(String rideType) {
+        this.rideType = rideType;
     }
 
     public List<DriversEntity> getDriversList() {
@@ -143,12 +119,28 @@ public class RideEntity {
         this.recurrentList = recurrentList;
     }
 
-    public String getRideType() {
-        return rideType;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setRideType(String rideType) {
-        this.rideType = rideType;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 
     @Override

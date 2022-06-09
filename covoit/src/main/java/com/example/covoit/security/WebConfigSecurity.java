@@ -61,16 +61,18 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
         jwtAuthentificationFilter.setFilterProcessesUrl("/Covoit/login/**");
         http.cors().and().csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/Covoit/login/**").permitAll();
+        http.authorizeRequests().antMatchers("/Covoit/admin/refresh/**").permitAll();
+        http.authorizeRequests().antMatchers("/Covoit/login/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/login/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/admin/validate_account").hasAuthority("Admin");
 
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/user/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/Covoit/getAllUser").hasAuthority("User");
         http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/Covoit/**").permitAll();
 
         http.headers().frameOptions().disable();
-        http.authorizeRequests().anyRequest().authenticated();
 
+        http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(jwtAuthentificationFilter);
         http.addFilterBefore(new JwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 

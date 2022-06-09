@@ -1,19 +1,17 @@
 package com.example.covoit.service;
 
-import com.example.covoit.dto.RecurrentRideDto;
-import com.example.covoit.dto.RideDto;
-import com.example.covoit.dto.SimpleRideDto;
-import com.example.covoit.dto.UserDto;
+import com.example.covoit.dto.*;
 import com.example.covoit.entity.RecurrentRideEntity;
 import com.example.covoit.entity.RideEntity;
 import com.example.covoit.entity.SimpleRideEntity;
 import com.example.covoit.entity.UserEntity;
+
 import com.example.covoit.repository.*;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.sql.Driver;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +26,7 @@ public class RideService implements IRideService {
 
     @Autowired
     public IRecurrentRepository recurrentRepository;
+
 
     @Autowired
     public IDriverRepository driverRepository;
@@ -74,6 +73,61 @@ public class RideService implements IRideService {
     }
 
     @Override
+    public RideDto toDtoConnected(RideEntity entity) {
+        RideDto dto = new RideDto();
+
+
+        dto.setId(entity.getId());
+        dto.setDeparture(entity.getDeparture());
+        dto.setDestination(entity.getDestination());
+        dto.setSeats(entity.getSeats());
+        dto.setVehicule_type(entity.getVehicleType());
+        dto.setRideType(entity.getRideType());
+
+//        List<DriverDto> listUserDto = new ArrayList();
+//        for (int i = 0; i < entity.getDriversList().size(); i++) {
+//
+//            DriverDto driverDto = new DriverDto();
+//            driverDto.setId(entity.getDriversList().get(i).getId());
+//            driverDto.
+//
+//
+//            listUserDto.add(driverDto);
+//
+//        }
+//        dto.setDriversList(listUserDto);
+
+
+
+        List<SimpleRideDto> simpleRideList = new ArrayList();
+        SimpleRideDto simpleRide = new SimpleRideDto();
+
+        for (int i = 0; i < entity.getSimpleList().size(); i++) {
+            simpleRide.setDateAller(entity.getSimpleList().get(i).getDateAller());
+            simpleRide.setTimeAller(entity.getSimpleList().get(i).getTimeAller());
+            simpleRide.setTimeRetour(entity.getSimpleList().get(i).getTimeRetour());
+            simpleRideList.add(simpleRide);
+        }
+        dto.setSimpleList(simpleRideList);
+
+        List<RecurrentRideDto> recurrentRideList = new ArrayList();
+
+        for (int i = 0; i < entity.getRecurrentList().size(); i++) {
+            RecurrentRideDto recurrentRide = new RecurrentRideDto();
+            recurrentRide.setJourAller(entity.getRecurrentList().get(i).getJourAller());
+            recurrentRide.setTimeAller(entity.getRecurrentList().get(i).getTimeAller());
+            recurrentRide.setTimeRetour(entity.getRecurrentList().get(i).getTimeRetour());
+            recurrentRideList.add(i, recurrentRide);
+        }
+        dto.setRecurrentList(recurrentRideList);
+
+        return dto;
+    }
+
+
+
+
+    @Override
     public List<RideDto> getRides() {
         List<RideEntity> rideList = rideRepository.findAll();
         List<RideDto> listAllRide = new ArrayList<>();
@@ -84,6 +138,8 @@ public class RideService implements IRideService {
         }
         return listAllRide;
     }
+
+
 
  //------------- Proposition de trajet --------------------//
 
@@ -159,6 +215,7 @@ public class RideService implements IRideService {
 
         List<RideDto> listAllRide = new ArrayList<>();
 
+
         for (RideEntity entity : simpleRideList) {
             RideDto dto = this.toDto(entity);
             listAllRide.add(dto);
@@ -185,12 +242,13 @@ public class RideService implements IRideService {
         for(int i = 0 ; i < entity.getSimpleList().size() ; i++){
             simpleRepository.deleteById(entity.getSimpleList().get(i).getId());
         }
-        for(int i = 0 ; i < entity.getDriverList().size() ; i++){
-            driverRepository.deleteById(entity.getDriverList().get(i).getId());
+        for(int i = 0 ; i < entity.getDriversList().size() ; i++){
+            driverRepository.deleteById(entity.getDriversList().get(i).getId());
         }
         rideRepository.deleteById(id);
         return dto;
     }
+
 }
 
 

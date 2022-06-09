@@ -1,5 +1,6 @@
 package com.example.covoit.dto;
 
+import com.example.covoit.entity.DriversEntity;
 import com.example.covoit.entity.RoleEntity;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,8 @@ public class UserDto {
     private String avatar;
     private Boolean verified;
     private LocalDateTime createdAt;
+
+    private List<DriversEntity> driversList;
 
 
     public Integer getId() {
@@ -117,6 +120,15 @@ public class UserDto {
         this.createdAt = createdAt;
     }
 
+
+    public List<DriversEntity> getDriversList() {
+        return driversList;
+    }
+
+    public void setDriversList(List<DriversEntity> driversList) {
+        this.driversList = driversList;
+    }
+
     @Override
     public String toString() {
         return "UserDto{" +
@@ -126,11 +138,13 @@ public class UserDto {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
+                ", role=" + role +
                 ", isConnect=" + isConnect +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", verified=" + verified +
+                ", createdAt=" + createdAt +
+                ", driversList=" + driversList +
                 '}';
     }
 }
