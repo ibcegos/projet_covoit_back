@@ -2,10 +2,12 @@ package com.example.covoit.controller;
 
 
 import com.example.covoit.dto.UserDto;
+import com.example.covoit.entity.ContactEntity;
 import com.example.covoit.entity.RoleEntity;
 import com.example.covoit.entity.UserEntity;
 import com.example.covoit.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +19,11 @@ public class AccountUserController {
 
     @Autowired
     private AccountService service;
+
+    @GetMapping("/get_users_by_username/{username}")
+    public String getUserByUsername(@PathVariable String username) {
+        return service.getUserByUsername(username);
+    }
 
     @PostMapping("add_user")
     public UserEntity addUser(@RequestBody UserDto user) {
@@ -31,6 +38,11 @@ public class AccountUserController {
     @PostMapping("addRoleToUser")
     public void addRoleToUser(@RequestBody RoleUserForm form) {
         service.addRoleToUser(form.getUsername(), form.getRoleName());
+    }
+
+    @PostMapping("send_message")
+    public void sendMessage(@RequestBody ContactEntity contact) {
+        service.sendMessage(contact);
     }
 
 

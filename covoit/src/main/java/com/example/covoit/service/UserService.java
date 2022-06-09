@@ -98,32 +98,32 @@ public class UserService implements IUserService {
         return listAllUser;
     }
 
-    @Override
-    public List<UserDto> getUserToValidate() {
-        List<UserEntity> userToValidate = repository.findByUserNoValidate();
-        List<UserDto> listAllUserNoValidate = new ArrayList<>();
+//    @Override
+//    public List<UserDto> getUserToValidate() {
+//        List<UserEntity> userToValidate = repository.findByUserNoValidate();
+//        List<UserDto> listAllUserNoValidate = new ArrayList<>();
+//
+//        for (int i =0; i < userToValidate.size(); i++) {
+//            UserEntity entity = userToValidate.get(i);
+//            UserDto dto = this.toDto(entity);
+//            listAllUserNoValidate.add(dto);
+//        }
+//
+//        return listAllUserNoValidate;
+//    }
 
-        for (int i =0; i < userToValidate.size(); i++) {
-            UserEntity entity = userToValidate.get(i);
-            UserDto dto = this.toDto(entity);
-            listAllUserNoValidate.add(dto);
-        }
-
-        return listAllUserNoValidate;
-    }
-
-    @Override
-    public UserDto validateAccountService(UserDto dto) {
-        UserEntity entity = this.toEntity(dto);
-        entity.setVerified(true);
-
-        repository.saveAndFlush(entity);
-
-        UserDto returnDto = new UserDto();
-        returnDto = this.toDto(entity);
-
-        return returnDto;
-    }
+//    @Override
+//    public UserDto validateAccountService(UserDto dto) {
+//        UserEntity entity = this.toEntity(dto);
+//        entity.setVerified(true);
+//
+//        repository.saveAndFlush(entity);
+//
+//        UserDto returnDto = new UserDto();
+//        returnDto = this.toDto(entity);
+//
+//        return returnDto;
+//    }
 
 
 }

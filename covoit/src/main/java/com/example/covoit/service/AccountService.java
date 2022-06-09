@@ -3,8 +3,10 @@ package com.example.covoit.service;
 
 import com.example.covoit.dto.RoleDto;
 import com.example.covoit.dto.UserDto;
+import com.example.covoit.entity.ContactEntity;
 import com.example.covoit.entity.RoleEntity;
 import com.example.covoit.entity.UserEntity;
+import com.example.covoit.repository.IContactRepository;
 import com.example.covoit.repository.IRoleRepository;
 import com.example.covoit.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ private IRoleRepository roleRepository;
 private IUserRepository userRepository;
 
 @Autowired
+private IContactRepository contactRepository;
+
+@Autowired
 private PasswordEncoder passwordEncoder;
 
     @Override
@@ -38,12 +43,15 @@ private PasswordEncoder passwordEncoder;
         // a for loop to get the roles to set the roleDto
 
         List<RoleDto> listRoleDto = new ArrayList<>();
-       for (int i = 0; i < entity.getRoles().size(); i++)  {
-           RoleDto roleDto = new RoleDto();
-           roleDto.setId(entity.getRoles().get(i).getId());
-           roleDto.setRoleName(entity.getRoles().get(i).getRoleName());
-           listRoleDto.add(roleDto);
-       }
+
+        if(entity.getRoles() != null){
+            for (int i = 0; i < entity.getRoles().size(); i++)  {
+                RoleDto roleDto = new RoleDto();
+                roleDto.setId(entity.getRoles().get(i).getId());
+                roleDto.setRoleName(entity.getRoles().get(i).getRoleName());
+                listRoleDto.add(roleDto);
+            }
+        }
 
         dto.setId(entity.getId());
         dto.setFirstName(entity.getFirstName());
@@ -99,11 +107,6 @@ private PasswordEncoder passwordEncoder;
         UserEntity entity = this.toEntity(user);
         List<RoleEntity> userRole = roleRepository.findByRoleNameList("User");
         entity.setRoles(userRole);
-//        RoleEntity userRole = new RoleEntity();
-//        userRole.setRoleName("User");
-//        userRole.setId(1);
-//        entity.getRoles().set(5);
-
         entity.setCreatedAt(LocalDateTime.now());
         try {
             String pw=entity.getPassword();
@@ -130,7 +133,7 @@ private PasswordEncoder passwordEncoder;
     }
 
     @Override
-    public List<UserDto> listUsers() {
+    public List<UserDto> getAllUsers() {
         List<UserEntity> userList =userRepository.findAll();
         List<UserDto> listAllUser = new ArrayList<>();
 
@@ -140,9 +143,7 @@ private PasswordEncoder passwordEncoder;
             listAllUser.add(dto);
         }
         return listAllUser;
-
     }
-
 
     @Override
     public UserDto validateAccountService(UserDto dto) {
@@ -156,5 +157,56 @@ private PasswordEncoder passwordEncoder;
 
         return returnDto;
     }
+
+    @Override
+    public UserDto deleteUserService(Integer id) {
+        UserEntity entity = new UserEntity();
+        entity = userRepository.getUserByIdTest(id);
+        UserDto dto = new UserDto();
+        dto = toDto(entity);
+        userRepository.deleteById(id);
+        return dto;
+    }
+
+    @Override
+    public List<UserDto> getUserToValidate() {
+        List<UserEntity> userToValidate = userRepository.findByUserNoValidate();
+        List<UserDto> listAllUserNoValidate = new ArrayList<>();
+
+        for (int i =0; i < userToValidate.size(); i++) {
+            UserEntity entity = userToValidate.get(i);
+            UserDto dto = this.toDto(entity);
+            listAllUserNoValidate.add(dto);
+        }
+
+        return listAllUserNoValidate;
+    }
+
+    @Override
+    public UserDto updateUserService(UserDto dto) {
+        UserEntity entity = toEntity(dto);
+        entity = userRepository.saveAndFlush(entity);
+
+        return toDto(entity);
+    }
+
+    @Override
+    public String getUserByUsername(String username) {
+        UserEntity entity = userRepository.findByUsername2(username);
+        String pseudo = entity.getUsername();
+        return pseudo;
+    }
+
+    @Override
+    public void sendMessage(ContactEntity contact) {
+        contactRepository.saveAndFlush(contact);
+    }
+
+    @Override
+    public List<ContactEntity> getAllContact() {
+        return contactRepository.findAll();
+    }
+
+
 }
 

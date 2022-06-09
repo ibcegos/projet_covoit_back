@@ -46,12 +46,9 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
                 user.getRoles().forEach(r -> {
                     authorities.add(new SimpleGrantedAuthority(r.getRoleName()));
                 });
-
                 return new User(user.getUsername(),user.getPassword(),authorities);
             }
         });
-
-
     }
 
 
@@ -63,9 +60,11 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/Covoit/login/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/login/**").permitAll();
-
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/Covoit/admin/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/admin/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/user/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/Covoit/getAllUser").hasAuthority("User");
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/Covoit/**").permitAll();
+        //http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/admin/**").hasAuthority("Admin");
 
 
         http.headers().frameOptions().disable();

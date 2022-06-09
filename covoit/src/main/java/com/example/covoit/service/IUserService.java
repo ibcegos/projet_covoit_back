@@ -17,7 +17,7 @@ public interface IUserService {
     //pas utilisé
     List<UserDto> getAllUser();
 
-    List<UserDto> getUserToValidate();
+    //List<UserDto> getUserToValidate();
 
-    UserDto validateAccountService(UserDto dto);
+//    UserDto validateAccountService(UserDto dto);
 }
