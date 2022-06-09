@@ -1,6 +1,7 @@
 package com.example.covoit.controller;
 
 import com.example.covoit.dto.DriverDto;
+import com.example.covoit.entity.DriversEntity;
 import com.example.covoit.service.IDriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,10 +17,10 @@ import java.util.List;
 public class DriverController {
     @Autowired
     private IDriverService driverService;
-//    @GetMapping("/getdriver")
-//    public List<DriverDto> getDrivers(){
-//        return driverService.getDrivers();
-//    }
+    @GetMapping("/getdriver")
+    public List<DriversEntity> getDrivers(){
+        return driverService.getDriverRide();
+    }
 
 }
 
