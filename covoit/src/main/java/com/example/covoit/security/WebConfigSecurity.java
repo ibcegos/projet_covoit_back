@@ -46,12 +46,9 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
                 user.getRoles().forEach(r -> {
                     authorities.add(new SimpleGrantedAuthority(r.getRoleName()));
                 });
-
                 return new User(user.getUsername(),user.getPassword(),authorities);
             }
         });
-
-
     }
 
 
@@ -62,15 +59,24 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/Covoit/admin/refresh/**").permitAll();
-        http.authorizeRequests().antMatchers("/Covoit/login/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/login/**").permitAll();
-        http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/admin/validate_account").hasAuthority("Admin");
-
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/Covoit/admin/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/admin/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/user/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/Covoit/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/user/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/Covoit/**").permitAll();
+
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/Covoit/admin/validate_account").hasAuthority("Admin");
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/Covoit/getAllUser").hasAuthority("User");
+
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/Covoit/getRides").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/Covoit/**").permitAll();
 //        http.headers().frameOptions().disable();
+
+
+        http.headers().frameOptions().disable();
+
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(jwtAuthentificationFilter);
         http.addFilterBefore(new JwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

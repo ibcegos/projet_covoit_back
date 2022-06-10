@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 
 public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
 
     public JwtAuthentificationFilter(AuthenticationManager authenticationManager) {
@@ -51,16 +51,6 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
         }
     }
 
-
-//        System.out.println("attemptAuthentication");
-//        String username=request.getParameter("username");
-//        String password=request.getParameter("password");
-//        System.out.println("username : "+username);
-//        System.out.println("password : "+password);
-//        UsernamePasswordAuthenticationToken authenticationToken =new UsernamePasswordAuthenticationToken(username,password);
-//        return authenticationManager.authenticate(authenticationToken);
-
-
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
@@ -77,7 +67,7 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
         String jwtRefreshToken= JWT.create()
                 .withIssuer(request.getRequestURI())
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis()+20*60*1000))
+                .withExpiresAt(new Date(System.currentTimeMillis()+15354*60*1000))
                 .sign(algorithm);
         Map<String, String> idToken= new HashMap<>();
         idToken.put("accessToken",jwtAccessToken);

@@ -27,9 +27,11 @@ public class UserService implements IUserService {
 //            roleDto.setId(roleEntity.getId());
 //            roleDto.setRoleName(roleEntity.getRoleName());
 //        }
-        roleDto.setRoleName(entity.getRoles().toString());
-
+        if (dto.getId() != null) {
+            roleDto.setRoleName(entity.getRoles().toString());
+        }
         dto.setId(entity.getId());
+
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setUsername(entity.getUsername());
@@ -95,34 +97,40 @@ public class UserService implements IUserService {
         return listAllUser;
     }
 
-    @Override
-    public List<UserDto> getUserToValidate() {
-        List<UserEntity> userToValidate = repository.findByUserNoValidate();
-        List<UserDto> listAllUserNoValidate = new ArrayList<>();
+//    @Override
+//    public List<UserDto> getUserToValidate() {
+//        List<UserEntity> userToValidate = repository.findByUserNoValidate();
+//        List<UserDto> listAllUserNoValidate = new ArrayList<>();
+//
+//        for (int i =0; i < userToValidate.size(); i++) {
+//            UserEntity entity = userToValidate.get(i);
+//            UserDto dto = this.toDto(entity);
+//            listAllUserNoValidate.add(dto);
+//        }
+//
+//        return listAllUserNoValidate;
+//    }
 
-        for (int i =0; i < userToValidate.size(); i++) {
-            UserEntity entity = userToValidate.get(i);
-            UserDto dto = this.toDto(entity);
-            listAllUserNoValidate.add(dto);
-        }
+//    @Override
+//    public UserDto validateAccountService(UserDto dto) {
+//        UserEntity entity = this.toEntity(dto);
+//        entity.setVerified(true);
+//
+//        repository.saveAndFlush(entity);
+//
+//        UserDto returnDto = new UserDto();
+//        returnDto = this.toDto(entity);
+//
+//        return returnDto;
+//    }
 
-        return listAllUserNoValidate;
+    public UserDto getUserProfil(String username) {
+        UserEntity entity = repository.findProfilByUsername(username);
+        UserDto dto = new UserDto();
+
+        dto = this.toDto(entity);
+
+        return dto;
     }
-
-    @Override
-    public UserDto validateAccountService(UserDto dto) {
-        UserEntity entity = this.toEntity(dto);
-        entity.setVerified(true);
-
-        repository.saveAndFlush(entity);
-
-        UserDto returnDto = new UserDto();
-        returnDto = this.toDto(entity);
-
-        return returnDto;
-    }
-
-
-
 
 }

@@ -1,6 +1,7 @@
 package com.example.covoit.service;
 
 import com.example.covoit.dto.UserDto;
+import com.example.covoit.entity.ContactEntity;
 import com.example.covoit.entity.RoleEntity;
 import com.example.covoit.entity.UserEntity;
 
@@ -16,7 +17,7 @@ public interface IAccountService {
 
     UserEntity loadUserByUsername(String username);
 
-    List<UserDto> listUsers();
+    List<UserDto> getAllUsers();
 
     UserDto toDto (UserEntity entity);
 
@@ -24,5 +25,16 @@ public interface IAccountService {
 
     UserDto validateAccountService(UserDto dto);
 
+    UserDto deleteUserService(Integer id);
+
+    List<UserDto> getUserToValidate();
+
+    UserDto updateUserService(UserDto dto);
+
+    String getUserByUsername(String username);
+
+    void sendMessage(ContactEntity contact);
+
+    List<ContactEntity> getAllContact();
 
 }

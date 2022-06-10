@@ -14,12 +14,10 @@ public interface IUserService {
 
     Integer createUser (UserDto dto);
 
-    //pas utilisé
     List<UserDto> getAllUser();
-
-    List<UserDto> getUserToValidate();
 
     UserDto validateAccountService(UserDto dto);
 
+    public UserDto getUserProfil(String username);
 
 }
