@@ -4,7 +4,6 @@ import com.example.covoit.dto.*;
 import com.example.covoit.entity.RecurrentRideEntity;
 import com.example.covoit.entity.RideEntity;
 import com.example.covoit.entity.SimpleRideEntity;
-import com.example.covoit.entity.UserEntity;
 import com.example.covoit.repository.IRecurrentRepository;
 import com.example.covoit.repository.IRideRepository;
 import com.example.covoit.repository.ISimpleRepository;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.sql.Driver;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +33,17 @@ public class RideService implements IRideService {
     @Override
     public RideDto toDto(RideEntity entity) {
         RideDto dto = new RideDto();
+        DriverDto driverDto = new DriverDto();
+        UserDto userDto = new UserDto();
         dto.setId(entity.getId());
         dto.setDeparture(entity.getDeparture());
         dto.setDestination(entity.getDestination());
         dto.setSeats(entity.getSeats());
         dto.setVehicule_type(entity.getVehicleType());
         dto.setRideType(entity.getRideType());
+
+
+
 
 
         List<SimpleRideDto> simpleRideList = new ArrayList();
@@ -225,6 +228,18 @@ public class RideService implements IRideService {
 //            recurrentRepository.delete(recurrentRideList.get(i));
 //        }
 //    }
+
+    @Override
+    public List<RideDto> getRidesByDeparture(String departure) {
+        List<RideEntity> rideList = rideRepository.findRideEntityByDeparture(departure);
+        List<RideDto> listRide = new ArrayList<>();
+
+        for (RideEntity entity : rideList) {
+            RideDto dto = this.toDto(entity);
+            listRide.add(dto);
+        }
+        return listRide;
+    }
 
 
 }

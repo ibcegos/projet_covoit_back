@@ -26,5 +26,7 @@ public interface IRideService {
 
     RideEntity toEntity(RideDto dto);
 
+    List<RideDto> getRidesByDeparture(String departure);
+
 //    List<RideDto> getRidesByUser();
 }

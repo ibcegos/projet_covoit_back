@@ -43,6 +43,10 @@ public class RideController {
 //        return service.getRidesByUser();
 //
 //    }
+    @GetMapping("getRidesByDeparture/{departure}")
+    public List<RideDto> getRidesByDeparture(@PathVariable String departure) {
+        return service.getRidesByDeparture(departure);
+    }
 
 
 }

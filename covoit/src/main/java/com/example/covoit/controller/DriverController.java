@@ -18,7 +18,7 @@ public class DriverController {
     @Autowired
     private IDriverService driverService;
     @GetMapping("/getdriver")
-    public List<DriversEntity> getDrivers(){
+    public List<DriverDto> getDrivers(){
         return driverService.getDriverRide();
     }
 
